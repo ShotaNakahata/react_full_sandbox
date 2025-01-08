@@ -9,7 +9,7 @@ const Player = ({ name, symbol }) => {
   };
 
   const handleChangeName = (e) => {
-    setPlayerName( e.target.value);
+    setPlayerName(e.target.value);
   };
 
   return (
@@ -23,7 +23,7 @@ const Player = ({ name, symbol }) => {
             onChange={handleChangeName}
           />
         ) : (
-          <span className=".player-name">{name}</span>
+          <span className=".player-name">{playerName}</span>
         )}
         <span className=".player-symbol">{symbol}</span>
       </span>
