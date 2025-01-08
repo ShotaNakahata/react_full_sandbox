@@ -6,14 +6,15 @@ const initialGameboard = Array(3)
   .map(() => Array(3).fill(null));
 
 // ゲームボードコンポーネント
-const GameBoard = () => {
+const GameBoard = ({handleSelectSquqre,activePlayer}) => {
   const [gameBoard, setGameBoard] = useState(initialGameboard);
   const handleSquare = (rowIdx, colIdx) => {
     setGameBoard((state) => {
       const newState = [...state.map((innerArray)=>[...innerArray])];
-      newState[rowIdx][colIdx] = "X";
+      newState[rowIdx][colIdx] = activePlayer;
       return newState
     });
+    handleSelectSquqre()
   };
 
   return (
