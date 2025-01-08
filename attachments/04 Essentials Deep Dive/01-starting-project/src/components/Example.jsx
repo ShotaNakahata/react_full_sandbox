@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TabButton from "./TabButton";
+import Section from "./Section";
 import { EXAMPLES } from "../data";
 import TabButtons from "./TabButtons";
 
@@ -23,8 +23,9 @@ export const Example = () => {
   }
   return (
     <>
-      <section id="examples">
-        <h2>Examples</h2>
+      {/* <section id="examples">
+        <h2>Examples</h2> */}
+        <Section id="examples" text="Examples">
         <menu>
           <TabButtons
             tabNames={tabNames}
@@ -33,7 +34,8 @@ export const Example = () => {
           />
         </menu>
         {tabContent}
-      </section>
+        </Section>
+      {/* </section> */}
     </>
   );
 };

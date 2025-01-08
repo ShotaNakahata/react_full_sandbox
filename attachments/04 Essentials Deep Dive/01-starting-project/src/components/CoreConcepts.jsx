@@ -1,17 +1,17 @@
 import React from "react";
 import CoreConcept from "./CoreConcept";
 import { CORE_CONCEPTS } from "../data";
+import Section from "./Section";
 export const CoreConcepts = () => {
   return (
     <>
-      <section id="core-concepts">
-        <h2>Core Components</h2>
+      <Section id="core-concepts" title="Core Components">
         <ul>
           {CORE_CONCEPTS.map((conceptItem) => (
             <CoreConcept key={conceptItem.title} {...conceptItem} />
           ))}
         </ul>
-      </section>
+      </Section>
     </>
   );
 };
