@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // 初期ゲームボードの生成
 const initialGameboard = Array(3)
@@ -7,14 +7,29 @@ const initialGameboard = Array(3)
 
 // ゲームボードコンポーネント
 const GameBoard = () => {
+  const [gameBoard, setGameBoard] = useState(initialGameboard);
+  const handleSquare = (rowIdx, colIdx) => {
+    setGameBoard((state) => {
+      const newState = [...state.map((innerArray)=>[...innerArray])];
+      newState[rowIdx][colIdx] = "X";
+      return newState
+    });
+  };
+
   return (
     <ol id="game-board">
-      {initialGameboard.map((row, rowIdx) => (
+      {gameBoard.map((row, rowIdx) => (
         <li key={rowIdx}>
           <ol>
             {row.map((playerSymbol, colIdx) => (
               <li key={colIdx}>
-                <button>{playerSymbol}</button>
+                <button
+                  onClick={() => {
+                    handleSquare(rowIdx, colIdx);
+                  }}
+                >
+                  {playerSymbol}
+                </button>
               </li>
             ))}
           </ol>
