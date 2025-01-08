@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import TabButton from "./TabButton";
 import { EXAMPLES } from "../data";
-import  TabButtons  from "./TabButtons";
+import TabButtons from "./TabButtons";
 
 export const Example = () => {
   let tabContent = <p>Please select a topic.</p>;
-  const tabNames = ["Components","JSX","Props","State"]
+  const tabNames = ["Components", "JSX", "Props", "State"];
   const [selectedTopic, setSelectedTopic] = useState();
   function handleSelect(selectedButton) {
     setSelectedTopic(selectedButton);
@@ -23,15 +23,17 @@ export const Example = () => {
   }
   return (
     <>
-      <h2>Examples</h2>
-      <menu>
-        <TabButtons 
-        tabNames={tabNames} 
-        selectedTopic={selectedTopic} 
-        handleSelect={handleSelect}
-        />
-      </menu>
-      {tabContent}
+      <section id="examples">
+        <h2>Examples</h2>
+        <menu>
+          <TabButtons
+            tabNames={tabNames}
+            selectedTopic={selectedTopic}
+            handleSelect={handleSelect}
+          />
+        </menu>
+        {tabContent}
+      </section>
     </>
   );
 };
