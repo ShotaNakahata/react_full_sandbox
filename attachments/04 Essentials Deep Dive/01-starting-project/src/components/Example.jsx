@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import TabButton from "./TabButton";
 import { EXAMPLES } from "../data";
+import  TabButtons  from "./TabButtons";
+
 export const Example = () => {
   let tabContent = <p>Please select a topic.</p>;
+  const tabNames = ["Components","JSX","Props","State"]
   const [selectedTopic, setSelectedTopic] = useState();
   function handleSelect(selectedButton) {
     setSelectedTopic(selectedButton);
   }
-
   if (selectedTopic) {
     tabContent = (
       <div id="tab-content">
@@ -23,30 +25,11 @@ export const Example = () => {
     <>
       <h2>Examples</h2>
       <menu>
-        <TabButton
-          isSelected={selectedTopic === "components"}
-          onSelect={() => handleSelect("components")}
-        >
-          Components
-        </TabButton>
-        <TabButton
-          isSelected={selectedTopic === "jsx"}
-          onSelect={() => handleSelect("jsx")}
-        >
-          JSX
-        </TabButton>
-        <TabButton
-          isSelected={selectedTopic === "props"}
-          onSelect={() => handleSelect("props")}
-        >
-          Props
-        </TabButton>
-        <TabButton
-          isSelected={selectedTopic === "state"}
-          onSelect={() => handleSelect("state")}
-        >
-          State
-        </TabButton>
+        <TabButtons 
+        tabNames={tabNames} 
+        selectedTopic={selectedTopic} 
+        handleSelect={handleSelect}
+        />
       </menu>
       {tabContent}
     </>

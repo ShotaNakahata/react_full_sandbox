@@ -1,24 +1,20 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import Header from './components/Header/Header.jsx';
+import Header from "./components/Header/Header.jsx";
 import { CoreConcepts } from "./components/CoreConcepts.jsx";
 import { Example } from "./components/Example.jsx";
-
 
 function App() {
   return (
     <div>
       <Header />
       <main>
-        
         <section id="core-concepts">
-          <CoreConcepts></CoreConcepts>
+          <CoreConcepts />
         </section>
-
         <section id="examples">
-        <Example></Example>
+          <Example />
         </section>
-
       </main>
     </div>
   );
