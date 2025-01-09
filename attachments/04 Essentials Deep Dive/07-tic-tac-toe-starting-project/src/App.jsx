@@ -39,7 +39,7 @@ function App() {
           </ol>
           <GameBoard handleSelectSquqre={handleSelectSquqre} turns={gameTurn} />
         </div>
-        <Log />
+        <Log logs={gameTurn}/>
       </main>
     </>
   );

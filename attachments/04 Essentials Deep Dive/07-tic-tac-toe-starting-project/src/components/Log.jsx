@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
 
-const Log = () => {
+// turn = { square: { row: rowIdx, col: colIdx }, player: currentPlayer }
+const Log = ({ logs }) => {
   return (
-    <div>Log</div>
-  )
-}
+    <ol id="log">
+      {logs.map((turn) => (
+        <li key={`${turn.square.row}${turn.square.col}`}>
+          {turn.player}selected{turn.square.row},{turn.square.col}
+        </li>
+      ))}
+    </ol>
+  );
+};
 
-export default Log
+export default Log;
