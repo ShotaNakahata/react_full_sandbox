@@ -5,19 +5,19 @@ import { useState } from "react";
 import Log from "./components/Log";
 function App() {
   const [activePlayer, setActivePlayer] = useState("X");
-  const [gameTurn, setGameTurn] = useState();
+  const [gameTurn, setGameTurn] = useState([]);
   function handleSelectSquqre(rowIdx, colIdx) {
     setActivePlayer((state) => (state === "X" ? "O" : "X"));
     setGameTurn((prevTurns) => {
       let currentPlayer = "X";
-      if (prevTurns.lenght > 0 && prevTurns[0].player === "X") {
+      if (prevTurns.length > 0 && prevTurns[0].player === "X") {
         currentPlayer = "O";
       }
       const updatedTurn = [
         { square: { row: rowIdx, col: colIdx }, player: currentPlayer },
         ...prevTurns,
       ];
-      return updatedTurn
+      return updatedTurn;
     });
   }
   return (
@@ -37,10 +37,7 @@ function App() {
               activePlayer={activePlayer === "O"}
             ></Player>
           </ol>
-          <GameBoard
-            handleSelectSquqre={handleSelectSquqre}
-            activePlayer={activePlayer}
-          />
+          <GameBoard handleSelectSquqre={handleSelectSquqre} turns={gameTurn} />
         </div>
         <Log />
       </main>
