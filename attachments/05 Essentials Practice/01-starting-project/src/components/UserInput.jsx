@@ -2,22 +2,7 @@
 import React from "react";
 import { useState } from "react";
 
-function UserInput() {
-  const [userInput, setUserInput] = useState({
-    InitialInvestment: 1000,
-    AnnualInvestment: 600,
-    ExpectReturn: 6,
-    Duration: 10,
-  });
-
-  const handleInput = (e) => {
-    let { name, value } = e.target;
-    setUserInput(prev=>({
-        ...prev,
-        [name]:value
-    }))
-  };
-
+function UserInput({handleInput,userInput}) {
   return (
     <section id="user-input">
       <div className="input-group">
@@ -25,20 +10,20 @@ function UserInput() {
           <p>Initial Investment</p>
           <input
             type="number"
-            name="InitialInvestment"
+            name="initialInvestment"
             required
             onChange={handleInput}
-            value={userInput.InitialInvestment}
+            value={userInput.initialInvestment}
           />
         </label>
         <label htmlFor="">
           <p>Annual Investment</p>
           <input
             type="number"
-            name="AnnualInvestment"
+            name="annualInvestment"
             required
             onChange={handleInput}
-            value={userInput.AnnualInvestment}
+            value={userInput.annualInvestment}
           />
         </label>
       </div>
@@ -48,20 +33,20 @@ function UserInput() {
           <p> Expect return</p>
           <input
             type="number"
-            name="ExpectReturn"
+            name="expectedReturn"
             required
             onChange={handleInput}
-            value={userInput.ExpectReturn}
+            value={userInput.expectedReturn}
           />
         </label>
         <label htmlFor="">
           <p>Duration</p>
           <input
             type="number"
-            name="Duration"
+            name="duration"
             required
             onChange={handleInput}
-            value={userInput.Duration}
+            value={userInput.duration}
           />
         </label>
       </div>
