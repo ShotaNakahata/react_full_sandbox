@@ -3,18 +3,29 @@ import GameBoard from "./components/GameBoard";
 import Player from "./components/Player";
 import { useState } from "react";
 import Log from "./components/Log";
+
+function deriveActivePlayer(gameTurn) {
+  let currentPlayer = "X";
+  if (gameTurn.length > 0 && gameTurn[0].player === "X") {
+    currentPlayer = "O";
+  }
+  return currentPlayer
+}
+
 function App() {
-  const [activePlayer, setActivePlayer] = useState("X");
+  // const [activePlayer, setActivePlayer] = useState("X");
   const [gameTurn, setGameTurn] = useState([]);
+  const activePlayer = deriveActivePlayer(gameTurn)
   function handleSelectSquqre(rowIdx, colIdx) {
-    setActivePlayer((state) => (state === "X" ? "O" : "X"));
+    // setActivePlayer((state) => (state === "X" ? "O" : "X"));
     setGameTurn((prevTurns) => {
-      let currentPlayer = "X";
-      if (prevTurns.length > 0 && prevTurns[0].player === "X") {
-        currentPlayer = "O";
-      }
+      const activePlayer = deriveActivePlayer(prevTurns)
+      // let currentPlayer = "X";
+      // if (prevTurns.length > 0 && prevTurns[0].player === "X") {
+      //   currentPlayer = "O";
+      // }
       const updatedTurn = [
-        { square: { row: rowIdx, col: colIdx }, player: currentPlayer },
+        { square: { row: rowIdx, col: colIdx }, player: activePlayer },
         ...prevTurns,
       ];
       return updatedTurn;
@@ -39,7 +50,7 @@ function App() {
           </ol>
           <GameBoard handleSelectSquqre={handleSelectSquqre} turns={gameTurn} />
         </div>
-        <Log logs={gameTurn}/>
+        <Log logs={gameTurn} />
       </main>
     </>
   );

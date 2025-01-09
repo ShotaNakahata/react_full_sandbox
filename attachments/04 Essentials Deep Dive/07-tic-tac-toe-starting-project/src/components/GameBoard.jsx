@@ -32,7 +32,10 @@ const GameBoard = ({ handleSelectSquqre, turns }) => {
           <ol>
             {row.map((playerSymbol, colIdx) => (
               <li key={colIdx}>
-                <button onClick={()=>handleSelectSquqre(rowIdx,colIdx)}>{playerSymbol}</button>
+                <button 
+                onClick={()=>handleSelectSquqre(rowIdx,colIdx)}
+                disabled={playerSymbol!==null}
+                >{playerSymbol}</button>
               </li>
             ))}
           </ol>
