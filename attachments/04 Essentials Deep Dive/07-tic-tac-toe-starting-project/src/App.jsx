@@ -3,6 +3,11 @@ import GameBoard from "./components/GameBoard";
 import Player from "./components/Player";
 import { useState } from "react";
 import Log from "./components/Log";
+import { WINNING_COMBINATIONS } from "./db/winning-combinations";
+
+const initialGameboard = Array(3)
+  .fill(null)
+  .map(() => Array(3).fill(null));
 
 function deriveActivePlayer(gameTurn) {
   let currentPlayer = "X";
@@ -16,6 +21,20 @@ function App() {
   // const [activePlayer, setActivePlayer] = useState("X");
   const [gameTurn, setGameTurn] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurn)
+
+  let gameBoard = initialGameboard;
+  for (let turn of gameTurn) {
+    const {square, player} = turn;
+    const {row, col} = square;
+    gameBoard[row][col] = player;
+  }
+
+  for(const combination of  WINNING_COMBINATIONS){
+    const firstSquareSymbol = ""
+    const secondSquareSymbol= ""
+    const thirdSquareSymbol= ""
+  }
+
   function handleSelectSquqre(rowIdx, colIdx) {
     // setActivePlayer((state) => (state === "X" ? "O" : "X"));
     setGameTurn((prevTurns) => {
@@ -48,7 +67,7 @@ function App() {
               activePlayer={activePlayer === "O"}
             ></Player>
           </ol>
-          <GameBoard handleSelectSquqre={handleSelectSquqre} turns={gameTurn} />
+          <GameBoard handleSelectSquqre={handleSelectSquqre} gameBoard={gameBoard} />
         </div>
         <Log logs={gameTurn} />
       </main>
