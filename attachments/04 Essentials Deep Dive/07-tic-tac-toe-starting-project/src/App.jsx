@@ -23,30 +23,12 @@ function App() {
   const [gameTurn, setGameTurn] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurn);
 
-  let gameBoard = initialGameboard;
+  let gameBoard = [...initialGameboard.map((arry)=>[...arry])];
   for (let turn of gameTurn) {
     const { square, player } = turn;
     const { row, col } = square;
     gameBoard[row][col] = player;
   }
-
-  // export const WINNING_COMBINATIONS = [
-  //   [
-  //     { row: 0, column: 0 },
-  //     { row: 0, column: 1 },
-  //     { row: 0, column: 2 },
-  //   ],
-  //   [
-  //     { row: 1, column: 0 },
-  //     { row: 1, column: 1 },
-  //     { row: 1, column: 2 },
-  //   ],
-  //   [
-  //     { row: 2, column: 0 },
-  //     { row: 2, column: 1 },
-  //     { row: 2, column: 2 },
-  //   ],]
-
   let winner;
 
   for (const combination of WINNING_COMBINATIONS) {
@@ -66,6 +48,10 @@ function App() {
   }
 
   const draw = gameTurn.length === 9 && !winner;
+
+  function handleRestart() {
+    setGameTurn([])
+  }
 
   function handleSelectSquqre(rowIdx, colIdx) {
     // setActivePlayer((state) => (state === "X" ? "O" : "X"));
@@ -99,7 +85,7 @@ function App() {
               activePlayer={activePlayer === "O"}
             ></Player>
           </ol>
-          {(winner||draw )&& <GameOver winner={winner} />}
+          {(winner||draw )&& <GameOver winner={winner} onRestart = {handleRestart}/>}
           <GameBoard
             handleSelectSquqre={handleSelectSquqre}
             gameBoard={gameBoard}
