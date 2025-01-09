@@ -1,9 +1,10 @@
 import React from "react";
+import logo from "../assets/investment-calculator-logo.png";
 
 function Header() {
   return (
     <header id="header">
-      <img src="/investment-calculator-logo.png" alt="headerPhoto" />
+      <img src={logo} alt="headerPhoto" />
       <h1>Investment Calculator</h1>
     </header>
   );
