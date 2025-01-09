@@ -4,6 +4,7 @@ import Player from "./components/Player";
 import { useState } from "react";
 import Log from "./components/Log";
 import { WINNING_COMBINATIONS } from "./db/winning-combinations";
+import { GameOver } from "./components/GameOver";
 
 const initialGameboard = Array(3)
   .fill(null)
@@ -64,6 +65,8 @@ function App() {
     }
   }
 
+  const draw = gameTurn.length === 9 && !winner;
+
   function handleSelectSquqre(rowIdx, colIdx) {
     // setActivePlayer((state) => (state === "X" ? "O" : "X"));
     setGameTurn((prevTurns) => {
@@ -96,7 +99,7 @@ function App() {
               activePlayer={activePlayer === "O"}
             ></Player>
           </ol>
-          {winner && <p>winner is {winner}</p>}
+          {(winner||draw )&& <GameOver winner={winner} />}
           <GameBoard
             handleSelectSquqre={handleSelectSquqre}
             gameBoard={gameBoard}
