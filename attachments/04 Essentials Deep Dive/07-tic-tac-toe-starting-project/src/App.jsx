@@ -14,31 +14,60 @@ function deriveActivePlayer(gameTurn) {
   if (gameTurn.length > 0 && gameTurn[0].player === "X") {
     currentPlayer = "O";
   }
-  return currentPlayer
+  return currentPlayer;
 }
 
 function App() {
   // const [activePlayer, setActivePlayer] = useState("X");
   const [gameTurn, setGameTurn] = useState([]);
-  const activePlayer = deriveActivePlayer(gameTurn)
+  const activePlayer = deriveActivePlayer(gameTurn);
 
   let gameBoard = initialGameboard;
   for (let turn of gameTurn) {
-    const {square, player} = turn;
-    const {row, col} = square;
+    const { square, player } = turn;
+    const { row, col } = square;
     gameBoard[row][col] = player;
   }
 
-  for(const combination of  WINNING_COMBINATIONS){
-    const firstSquareSymbol = ""
-    const secondSquareSymbol= ""
-    const thirdSquareSymbol= ""
+  // export const WINNING_COMBINATIONS = [
+  //   [
+  //     { row: 0, column: 0 },
+  //     { row: 0, column: 1 },
+  //     { row: 0, column: 2 },
+  //   ],
+  //   [
+  //     { row: 1, column: 0 },
+  //     { row: 1, column: 1 },
+  //     { row: 1, column: 2 },
+  //   ],
+  //   [
+  //     { row: 2, column: 0 },
+  //     { row: 2, column: 1 },
+  //     { row: 2, column: 2 },
+  //   ],]
+
+  let winner;
+
+  for (const combination of WINNING_COMBINATIONS) {
+    const firstSquareSymbol =
+      gameBoard[combination[0].row][combination[0].column];
+    const secondSquareSymbol =
+      gameBoard[combination[1].row][combination[1].column];
+    const thirdSquareSymbol =
+      gameBoard[combination[2].row][combination[2].column];
+    if (
+      firstSquareSymbol &&
+      firstSquareSymbol === secondSquareSymbol &&
+      secondSquareSymbol === thirdSquareSymbol
+    ) {
+      winner = firstSquareSymbol;
+    }
   }
 
   function handleSelectSquqre(rowIdx, colIdx) {
     // setActivePlayer((state) => (state === "X" ? "O" : "X"));
     setGameTurn((prevTurns) => {
-      const activePlayer = deriveActivePlayer(prevTurns)
+      const activePlayer = deriveActivePlayer(prevTurns);
       // let currentPlayer = "X";
       // if (prevTurns.length > 0 && prevTurns[0].player === "X") {
       //   currentPlayer = "O";
@@ -67,7 +96,11 @@ function App() {
               activePlayer={activePlayer === "O"}
             ></Player>
           </ol>
-          <GameBoard handleSelectSquqre={handleSelectSquqre} gameBoard={gameBoard} />
+          {winner && <p>winner is {winner}</p>}
+          <GameBoard
+            handleSelectSquqre={handleSelectSquqre}
+            gameBoard={gameBoard}
+          />
         </div>
         <Log logs={gameTurn} />
       </main>
