@@ -21,9 +21,13 @@ function deriveActivePlayer(gameTurn) {
 function App() {
   // const [activePlayer, setActivePlayer] = useState("X");
   const [gameTurn, setGameTurn] = useState([]);
+  const [player, setPlayer] = useState({
+    X: "pa;yer1",
+    O: "player2",
+  });
   const activePlayer = deriveActivePlayer(gameTurn);
 
-  let gameBoard = [...initialGameboard.map((arry)=>[...arry])];
+  let gameBoard = [...initialGameboard.map((arry) => [...arry])];
   for (let turn of gameTurn) {
     const { square, player } = turn;
     const { row, col } = square;
@@ -43,14 +47,14 @@ function App() {
       firstSquareSymbol === secondSquareSymbol &&
       secondSquareSymbol === thirdSquareSymbol
     ) {
-      winner = firstSquareSymbol;
+      winner = player[firstSquareSymbol];
     }
   }
 
   const draw = gameTurn.length === 9 && !winner;
 
   function handleRestart() {
-    setGameTurn([])
+    setGameTurn([]);
   }
 
   function handleSelectSquqre(rowIdx, colIdx) {
@@ -68,6 +72,14 @@ function App() {
       return updatedTurn;
     });
   }
+
+  function handlePlayer(symbol,newName) {
+    setPlayer(prev=>({
+      ...prev,
+      [symbol]:newName
+    }))
+  }
+
   return (
     <>
       <Header></Header>
@@ -78,14 +90,18 @@ function App() {
               name="player1"
               symbol="X"
               activePlayer={activePlayer === "X"}
+              onChangeName={handlePlayer}
             ></Player>
             <Player
               name="player2"
               symbol="O"
               activePlayer={activePlayer === "O"}
+              onChangeName={handlePlayer}
             ></Player>
           </ol>
-          {(winner||draw )&& <GameOver winner={winner} onRestart = {handleRestart}/>}
+          {(winner || draw) && (
+            <GameOver winner={winner} onRestart={handleRestart} />
+          )}
           <GameBoard
             handleSelectSquqre={handleSelectSquqre}
             gameBoard={gameBoard}
