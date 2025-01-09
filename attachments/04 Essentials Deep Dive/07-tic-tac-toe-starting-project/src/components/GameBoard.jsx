@@ -6,16 +6,16 @@ const initialGameboard = Array(3)
   .map(() => Array(3).fill(null));
 
 // ゲームボードコンポーネント
-const GameBoard = ({handleSelectSquqre,activePlayer}) => {
-  const [gameBoard, setGameBoard] = useState(initialGameboard);
-  const handleSquare = (rowIdx, colIdx) => {
-    setGameBoard((state) => {
-      const newState = [...state.map((innerArray)=>[...innerArray])];
-      newState[rowIdx][colIdx] = activePlayer;
-      return newState
-    });
-    handleSelectSquqre()
-  };
+const GameBoard = ({handleSelectSquqre}) => {
+//   const [gameBoard, setGameBoard] = useState(initialGameboard);
+//   const handleSquare = (rowIdx, colIdx) => {
+//     setGameBoard((state) => {
+//       const newState = [...state.map((innerArray)=>[...innerArray])];
+//       newState[rowIdx][colIdx] = activePlayer;
+//       return newState
+//     });
+//     handleSelectSquqre()
+//   };
 
   return (
     <ol id="game-board">
@@ -25,9 +25,7 @@ const GameBoard = ({handleSelectSquqre,activePlayer}) => {
             {row.map((playerSymbol, colIdx) => (
               <li key={colIdx}>
                 <button
-                  onClick={() => {
-                    handleSquare(rowIdx, colIdx);
-                  }}
+                  onClick={handleSelectSquqre}
                 >
                   {playerSymbol}
                 </button>
