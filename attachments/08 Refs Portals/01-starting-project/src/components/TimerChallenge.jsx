@@ -13,7 +13,7 @@ function TimerChallenge({ title, targetTime }) {
 
     timer.current = setTimeout(() => {
       settimerExpired(true);
-      dialog.current.showModal();
+      dialog.current.open();
     }, targetTime * 1000);
   }
   function handleTimerStop() {
