@@ -16,11 +16,27 @@ function App() {
       };
     });
   }
+  // id: Math.random(),
+
+  function handleAddProject(projectData) {
+    setProjectState((prev) => {
+      const newProject = {
+        projectData,
+        id: Math.random(),
+      };
+      return {
+        ...prev,
+        projects: [...prev.projects, newProject],
+      };
+    });
+  }
+  console.log(projectState)
+  
   let content;
   if (projectState.selectedProjectId === null) {
-    content = <NewProject />;
+    content = <NewProject onAdd={handleAddProject}/>;
   } else if (projectState.selectedProjectId === undefined) {
-    content =<NoProjectSelected onStartProject={handleStartProject} />
+    content = <NoProjectSelected onStartProject={handleStartProject} />;
   }
   return (
     <main className="h-screen my-8 flex gap-8">
