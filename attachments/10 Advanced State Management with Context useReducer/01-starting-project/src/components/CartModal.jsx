@@ -1,4 +1,4 @@
-import { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
+import { forwardRef,useImperativeHandle, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import Cart from './Cart';
 import { CartContext } from '../store/shopping-cart-context';
