@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DUMMY_PRODUCTS } from './dummy-products.js';
+import { DUMMY_PRODUCTS } from "./dummy-products.js";
 import Header from "./components/Header.jsx";
 import Shop from "./components/Shop.jsx";
 import Product from "./components/Product.jsx";
@@ -66,21 +66,22 @@ function App() {
     });
   }
 
-  const ctxValue ={
-    items:shoppingCart.items,
-    itemToCart:handleAddItemToCart
-  }
+  const ctxValue = {
+    items: shoppingCart.items,
+    itemToCart: handleAddItemToCart,
+    updateItemQuantity:handleUpdateCartItemQuantity
+  };
 
   return (
     <CartContext.Provider value={ctxValue}>
       <Header
-        cart={shoppingCart}
-        onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
+        // cart={shoppingCart}
+        // onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
       />
-      <Shop >
+      <Shop>
         {DUMMY_PRODUCTS.map((product) => (
           <li key={product.id}>
-            <Product {...product} onAddToCart={handleAddItemToCart} />
+            <Product {...product} />
           </li>
         ))}
       </Shop>
