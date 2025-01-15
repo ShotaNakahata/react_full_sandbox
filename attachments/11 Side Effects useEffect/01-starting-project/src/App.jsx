@@ -4,11 +4,34 @@ import { AVAILABLE_PLACES } from './data.js';
 import Modal from './components/Modal.jsx';
 import DeleteConfirmation from './components/DeleteConfirmation.jsx';
 import logoImg from './assets/logo.png';
+import { sortPlacesByDistance } from './loc.js';
+import { useEffect } from 'react';
 
 function App() {
   const modal = useRef();
   const selectedPlace = useRef();
   const [pickedPlaces, setPickedPlaces] = useState([]);
+  const [availablePlace, setAvailablePlace] = useState([])
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const sortedPlace = sortPlacesByDistance(
+          AVAILABLE_PLACES,
+          position.coords.latitude,
+          position.coords.longitude
+        );
+        setAvailablePlace(sortedPlace);
+      },
+      (error) => {
+        console.error("Geolocation error:", error);
+        alert("Failed to fetch location. Please enable location services.");
+      }
+    );
+  }, []);
+  
+
+
 
   function handleStartRemovePlace(id) {
     modal.current.open();
@@ -62,7 +85,8 @@ function App() {
         />
         <Places
           title="Available Places"
-          places={AVAILABLE_PLACES}
+          fallbackText="Sroting place by distance..."
+          places={availablePlace}
           onSelectPlace={handleSelectPlace}
         />
       </main>
