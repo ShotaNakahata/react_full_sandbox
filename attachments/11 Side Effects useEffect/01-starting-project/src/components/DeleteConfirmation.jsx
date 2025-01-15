@@ -1,4 +1,9 @@
 export default function DeleteConfirmation({ onConfirm, onCancel }) {
+  console.log("timer start")
+  setTimeout(()=>{
+    onConfirm()
+    console.log("timer finsh")
+  },3000)
   return (
     <div id="delete-confirmation">
       <h2>Are you sure?</h2>
