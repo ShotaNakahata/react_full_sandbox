@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 
 export const CartContext = createContext({
   items: [],
@@ -61,7 +61,7 @@ function shoppingCartReducer(state, action) {
       };
   }
     }
-      
+     d 
 }
 
 export function CartContextProvider({ children }) {

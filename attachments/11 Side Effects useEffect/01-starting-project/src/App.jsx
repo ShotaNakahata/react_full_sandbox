@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-
 import Places from './components/Places.jsx';
 import { AVAILABLE_PLACES } from './data.js';
 import Modal from './components/Modal.jsx';
