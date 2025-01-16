@@ -12,7 +12,7 @@ function Quiz() {
     const activeQuestionIdx = answeredState === "" ? uerAnswers.length : uerAnswers.length - 1;
 
     const handleSelectedAnswer = useCallback(function handleSelectedAnswer(selectedAnswer) {
-        setAnsweredState("answered")   ///なぜ一度この値に変更しないといけないかが分からない
+        ("answered")   ///なぜ一度この値に変更しないといけないかが分からない
         console.log("from handleSelectedAnswer")
         setUerAnswers(prev => [...prev, selectedAnswer])
         setTimeout(() => {
