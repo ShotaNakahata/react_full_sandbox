@@ -1,13 +1,12 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-
 import IconButton from '../UI/IconButton.jsx';
 import MinusIcon from '../UI/Icons/MinusIcon.jsx';
 import PlusIcon from '../UI/Icons/PlusIcon.jsx';
 import CounterOutput from './CounterOutput.jsx';
 import { log } from '../../log.js';
-import { memo } from 'react';
+
 
 function isPrime(number) {
   log('Calculating if is prime number',2,'other');
@@ -26,7 +25,7 @@ function isPrime(number) {
 
   return true;
 }
-const Counter = memo(function Counter({ initialCount }) {
+const Counter = function Counter({ initialCount }) {
   log('<Counter /> rendered', 1);
   const initialCountIsPrime = isPrime(initialCount);
 
@@ -57,5 +56,5 @@ const Counter = memo(function Counter({ initialCount }) {
       </p>
     </section>
   );
-})
+}
 export default Counter
