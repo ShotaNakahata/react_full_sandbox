@@ -7,13 +7,23 @@ function QuestionTimer({ timeOut, onTimeOut }) {
     const [remainingTime, setRemainingTime] = useState(timeOut);
 
     useEffect(() => {
-        setTimeout(onTimeOut, timeOut);
-    }, [onTimeOut,timeOut])
+        console.log("setting timeout")
+        const timeout = setTimeout(onTimeOut, timeOut);
+        return ()=>{
+            console.log("clearTimeout")
+            clearTimeout(timeout)
+        }
+    }, [onTimeOut, timeOut])
 
     useEffect(() => {
-        setInterval(() => {
+        console.log("setting interval")
+        const interval = setInterval(() => {
             setRemainingTime(prev => prev - 100)
         }, 100)
+        return () => {
+            console.log("clearInterval")
+            clearInterval(interval);
+        }
     }, [])
 
     return (
