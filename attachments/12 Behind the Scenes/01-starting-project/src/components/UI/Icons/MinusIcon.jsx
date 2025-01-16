@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { log } from '../../../log.js';
 
 export default function MinusIcon(props) {

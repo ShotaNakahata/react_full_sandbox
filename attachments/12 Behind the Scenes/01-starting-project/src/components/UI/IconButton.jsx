@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
 import { log } from '../../log.js';
 
 export default function IconButton({ children, icon, ...props }) {
