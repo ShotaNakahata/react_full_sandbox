@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
+import { memo } from 'react';
 import { log } from '../../log.js';
 
-export default function IconButton({ children, icon, ...props }) {
+
+
+const IconButton = memo(function IconButton({ children, icon, ...props }) {
   log('<IconButton /> rendered', 2);
 
   const Icon = icon;
@@ -12,4 +15,6 @@ export default function IconButton({ children, icon, ...props }) {
       <span className="button-text">{children}</span>
     </button>
   );
-}
+})
+
+export default IconButton
