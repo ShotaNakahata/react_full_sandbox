@@ -7,6 +7,7 @@ import PlusIcon from '../UI/Icons/PlusIcon.jsx';
 import CounterOutput from './CounterOutput.jsx';
 import { log } from '../../log.js';
 import { useCallback } from 'react';
+import { useMemo } from 'react';
 
 
 function isPrime(number) {
@@ -28,7 +29,8 @@ function isPrime(number) {
 }
 const Counter = function Counter({ initialCount }) {
   log('<Counter /> rendered', 1);
-  const initialCountIsPrime = isPrime(initialCount);
+  
+  const initialCountIsPrime = useMemo(isPrime(initialCount),[initialCount]);
 
   const [counter, setCounter] = useState(initialCount);
 
