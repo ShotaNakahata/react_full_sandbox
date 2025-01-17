@@ -8,10 +8,11 @@ import CounterOutput from './CounterOutput.jsx';
 import { log } from '../../log.js';
 import { useCallback } from 'react';
 import { useMemo } from 'react';
+import CounterHistory from './CounterHistory.jsx';
 
 
 function isPrime(number) {
-  log('Calculating if is prime number',2,'other');
+  log('Calculating if is prime number', 2, 'other');
 
   if (number <= 1) {
     return false;
@@ -29,18 +30,23 @@ function isPrime(number) {
 }
 const Counter = function Counter({ initialCount }) {
   log('<Counter /> rendered', 1);
-  
-  const initialCountIsPrime = useMemo(isPrime(initialCount),[initialCount]);
 
-  const [counter, setCounter] = useState(initialCount);
+  const initialCountIsPrime = useMemo(() => { isPrime(initialCount) }, [initialCount]);
+
+  // const [counter, setCounter] = useState(initialCount);
+  const [counterChanges, setCounterChanges] = useState([{ value: initialCount, id: Math.random() * 100 }]);
+
+  const currentCounter = counterChanges.reduce((prevCounter, counterChange) => prevCounter + counterChange.value, 0)
 
   const handleDecrement = useCallback(function handleDecrement() {
-    setCounter((prevCounter) => prevCounter - 1);
-  },[])
+    // setCounter((prevCounter) => prevCounter - 1);
+    setCounterChanges(prev => [{ value: -1, id: Math.random() * 100 }, ...prev])
+  }, [])
 
   const handleIncrement = useCallback(function handleIncrement() {
-    setCounter((prevCounter) => prevCounter - 1);
-  },[])
+    // setCounter((prevCounter) => prevCounter + 1);
+    setCounterChanges(prev => [{ value: 1, id: Math.random() * 100 }, ...prev])
+  }, [])
 
   return (
     <section className="counter">
@@ -52,11 +58,12 @@ const Counter = function Counter({ initialCount }) {
         <IconButton icon={MinusIcon} onClick={handleDecrement}>
           Decrement
         </IconButton>
-        <CounterOutput value={counter} />
+        <CounterOutput value={currentCounter} />
         <IconButton icon={PlusIcon} onClick={handleIncrement}>
           Increment
         </IconButton>
       </p>
+      <CounterHistory history={counterChanges}></CounterHistory>
     </section>
   );
 }
