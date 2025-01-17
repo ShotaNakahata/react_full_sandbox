@@ -5,6 +5,7 @@ import Places from './Places.jsx';
 import { useEffect } from 'react';
 import ErrorPage from "../../../Error.jsx";
 import { sortPlacesByDistance } from '../loc.js';
+import { fetchAvalilablePlace } from '../http.js';
 
 export default function AvailablePlaces({ onSelectPlace }) {
   const [isFetching, setIsFetching] = useState(false)
@@ -15,11 +16,7 @@ export default function AvailablePlaces({ onSelectPlace }) {
     async function fetchPlaces() {
       setIsFetching(true)
       try {
-        const response = await fetch("http://localhost:3000/places")
-        const resData = await response.json()
-        if (!response.ok) {
-          throw new Error("failed to fetch places")//なぜここの条件文が必要なのか？もしfetch内のpromiseがrejectされたら自動的にcatchの方に行かないのか？それとも明示的にnew errorでerrorを生成しないとcatchがエラーがアタと認識しないのか
-        }
+        const resData = await fetchAvalilablePlace()
         navigator.geolocation.getCurrentPosition((position) => {
           const sortedPlace = sortPlacesByDistance(resData.places, position.coords.latitude, position.coords.longitude)
           setAvailablePlace(sortedPlace)
