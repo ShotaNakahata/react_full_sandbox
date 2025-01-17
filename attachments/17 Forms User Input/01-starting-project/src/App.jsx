@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import Header from './components/Header.jsx';
 import Login from './components/Login.jsx';
 
