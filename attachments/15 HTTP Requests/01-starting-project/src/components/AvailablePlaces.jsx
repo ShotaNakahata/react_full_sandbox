@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import Places from './Places.jsx';
 import { useEffect } from 'react';
-import ErrorPage  from "../../../Error.jsx";
+import ErrorPage from "../../../Error.jsx";
+import { sortPlacesByDistance } from '../loc.js';
 
 export default function AvailablePlaces({ onSelectPlace }) {
   const [isFetching, setIsFetching] = useState(false)
@@ -19,16 +20,21 @@ export default function AvailablePlaces({ onSelectPlace }) {
         if (!response.ok) {
           throw new Error("failed to fetch places")//なぜここの条件文が必要なのか？もしfetch内のpromiseがrejectされたら自動的にcatchの方に行かないのか？それとも明示的にnew errorでerrorを生成しないとcatchがエラーがアタと認識しないのか
         }
-        setAvailablePlace(resData.places)
+        navigator.geolocation.getCurrentPosition((position) => {
+          const sortedPlace = sortPlacesByDistance(resData.places, position.coords.latitude, position.coords.longitude)
+          setAvailablePlace(sortedPlace)
+          setIsFetching(false)
+        })
+
       } catch (error) {
-        setError({message:error.message||"faild to fetch place data"})
+        setError({ message: error.message || "faild to fetch place data" })
+        setIsFetching(false)
       }
-      setIsFetching(false)
     }
     fetchPlaces();
   }, [])
 
-  if(error){
+  if (error) {
     return <ErrorPage title="An error occured" message={error.message} ></ErrorPage>
   }
 
