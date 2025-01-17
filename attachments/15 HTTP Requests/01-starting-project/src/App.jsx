@@ -46,6 +46,14 @@ function App() {
     setUserPlaces((prevPickedPlaces) =>
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current.id)
     );
+    try {
+      await updateUserPlace(
+        { places: userPlaces.filter((place) => place.id !== selectedPlace.current.id) }
+      )
+    } catch (error) {
+      setUserPlaces(userPlaces)
+      setErroUpdatingPlaces({ message: error.message || "faild to delete places" })
+    }
 
     setModalIsOpen(false);
   }, []);
@@ -57,7 +65,7 @@ function App() {
   return (
     <>
       <Modal open={erroUpdatingPlaces} onClose={handleError}>
-        {erroUpdatingPlaces&&<ErrorPage
+        {erroUpdatingPlaces && <ErrorPage
           title="An Error occurred"
           message={erroUpdatingPlaces.message}
           onConfirm={handleError} />}
