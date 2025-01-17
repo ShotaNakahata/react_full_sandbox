@@ -9,6 +9,7 @@ import { log } from '../../log.js';
 import { useCallback } from 'react';
 import { useMemo } from 'react';
 import CounterHistory from './CounterHistory.jsx';
+// import { useEffect } from 'react';
 
 
 function isPrime(number) {
@@ -35,6 +36,10 @@ const Counter = function Counter({ initialCount }) {
 
   // const [counter, setCounter] = useState(initialCount);
   const [counterChanges, setCounterChanges] = useState([{ value: initialCount, id: Math.random() * 100 }]);
+
+  // useEffect(() => { 
+  //   setCounterChanges([{ value: initialCount, id: Math.random() * 100 }]) 
+  // }, [initialCount])
 
   const currentCounter = counterChanges.reduce((prevCounter, counterChange) => prevCounter + counterChange.value, 0)
 
