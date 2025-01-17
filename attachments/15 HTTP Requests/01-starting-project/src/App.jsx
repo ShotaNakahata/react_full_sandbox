@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useRef, useState, useCallback } from 'react';
-
+import ErrorPage from "../../Error.jsx";
 import Places from './components/Places.jsx';
 import Modal from './components/Modal.jsx';
 import DeleteConfirmation from './components/DeleteConfirmation.jsx';
@@ -12,7 +12,7 @@ function App() {
   const selectedPlace = useRef();
 
   const [userPlaces, setUserPlaces] = useState([]);
-
+  const [erroUpdatingPlaces, setErroUpdatingPlaces] = useState()
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   function handleStartRemovePlace(place) {
@@ -35,9 +35,10 @@ function App() {
       return [selectedPlace, ...prevPickedPlaces];
     });
     try {
-      await updateUserPlace({places:[selectedPlace,...userPlaces]})
+      await updateUserPlace({ places: [selectedPlace, ...userPlaces] })
     } catch (error) {
-      ///
+      setUserPlaces(userPlaces)
+      setErroUpdatingPlaces({ message: error.message || "faild to update places" })
     }
   }
 
@@ -49,8 +50,18 @@ function App() {
     setModalIsOpen(false);
   }, []);
 
+  function handleError() {
+    setErroUpdatingPlaces(null)
+  }
+
   return (
     <>
+      <Modal open={erroUpdatingPlaces} onClose={handleError}>
+        {erroUpdatingPlaces&&<ErrorPage
+          title="An Error occurred"
+          message={erroUpdatingPlaces.message}
+          onConfirm={handleError} />}
+      </Modal>
       <Modal open={modalIsOpen} onClose={handleStopRemovePlace}>
         <DeleteConfirmation
           onCancel={handleStopRemovePlace}
