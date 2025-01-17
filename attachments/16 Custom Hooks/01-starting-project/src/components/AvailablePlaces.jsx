@@ -1,63 +1,32 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
 import { useFetch } from "../hooks/useFetch";
 import Places from './Places.jsx';
 import Error from './Error.jsx';
 import { sortPlacesByDistance } from '../loc.js';
 import { fetchAvailablePlaces } from '../http.js';
 
+async function fetchSortedPlace() {
+  const places = await fetchAvailablePlaces()
+
+  return new Promise((resolve) => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const sortedPlaces = sortPlacesByDistance(
+        places,
+        position.coords.latitude,
+        position.coords.longitude
+      );
+      return resolve(sortedPlaces)
+    });
+  })
+}
+
 export default function AvailablePlaces({ onSelectPlace }) {
-  // const [isFetching, setIsFetching] = useState(false);
-  const [availablePlaces, setAvailablePlaces] = useState([]);
-  // const [error, setError] = useState();
-
-  const { isFetching, setIsFetching, fetchData: places, error, setError } = useFetch(fetchAvailablePlaces,[])
-
-  /////
-  navigator.geolocation.getCurrentPosition((position) => {
-    const sortedPlaces = sortPlacesByDistance(
-      places,
-      position.coords.latitude,
-      position.coords.longitude
-    );
-    setAvailablePlaces(sortedPlaces);
-    setIsFetching(false);
-  });
-  /////
-
-  // useEffect(() => {
-  //   async function fetchPlaces() {
-  //     setIsFetching(true);
-
-  //     try {
-  //       const places = await fetchAvailablePlaces();
-
-  //       navigator.geolocation.getCurrentPosition((position) => {
-  //         const sortedPlaces = sortPlacesByDistance(
-  //           places,
-  //           position.coords.latitude,
-  //           position.coords.longitude
-  //         );
-  //         setAvailablePlaces(sortedPlaces);
-  //         setIsFetching(false);
-  //       });
-  //     } catch (error) {
-  //       setError({
-  //         message:
-  //           error.message || 'Could not fetch places, please try again later.',
-  //       });
-  //       setIsFetching(false);
-  //     }
-  //   }
-
-  //   fetchPlaces();
-  // }, []);
+  const { isFetching, fetchData: availablePlaces, error } = useFetch(fetchSortedPlace, [])
 
   if (error) {
     return <Error title="An error occurred!" message={error.message} />;
   }
-
   return (
     <Places
       title="Available Places"
