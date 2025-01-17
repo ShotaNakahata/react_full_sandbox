@@ -56,7 +56,7 @@ function App() {
     }
 
     setModalIsOpen(false);
-  }, []);
+  }, [userPlaces]);
 
   function handleError() {
     setErroUpdatingPlaces(null)
