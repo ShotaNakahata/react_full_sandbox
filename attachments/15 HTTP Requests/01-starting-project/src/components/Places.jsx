@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
 export default function Places({ title, places, fallbackText, onSelectPlace }) {
   console.log(places);
   return (

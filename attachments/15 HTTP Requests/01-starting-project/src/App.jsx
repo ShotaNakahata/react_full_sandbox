@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { useRef, useState, useCallback } from 'react';
 
 import Places from './components/Places.jsx';
