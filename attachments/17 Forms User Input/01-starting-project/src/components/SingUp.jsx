@@ -1,14 +1,27 @@
+import { useState } from "react";
+
+
 /* eslint-disable react/react-in-jsx-scope */
+
+
+// data 
+// {email: 'csava@asfaf', password: 'fasasfsa', confirm-password: 'fasfasf', first-name: 'asfasasf', last-name: 'asfasfas', …}
 export default function Signup() {
+    const [passwordIsNotMatch, setPasswordIsNotMatch] = useState(false)
+
     function handleSubmit(e) {
         e.preventDefault()
         const fd = new FormData(e.target);
         const acquisitionChannel = fd.getAll("acquisition")
         const data = Object.fromEntries(fd.entries())
         data.acquisition = acquisitionChannel
+        if(data.password!==data["confirm-password"]){
+            setPasswordIsNotMatch(true)
+            return
+        }
         console.log("fd", fd)
         console.log("data", data)
-        e.target.reset();
+        // e.target.reset();
     }
     return (
         <form onSubmit={handleSubmit}>
@@ -33,6 +46,9 @@ export default function Signup() {
                         name="password"
                         required
                         minLength={3} />
+                    <div className="control-error">
+                        {passwordIsNotMatch&&<p>Password must Match</p>}
+                    </div>
                 </div>
 
                 <div className="control">
@@ -52,12 +68,12 @@ export default function Signup() {
             <div className="control-row">
                 <div className="control">
                     <label htmlFor="first-name">First Name</label>
-                    <input type="text" id="first-name" name="first-name" required/>
+                    <input type="text" id="first-name" name="first-name" required />
                 </div>
 
                 <div className="control">
                     <label htmlFor="last-name">Last Name</label>
-                    <input type="text" id="last-name" name="last-name" required/>
+                    <input type="text" id="last-name" name="last-name" required />
                 </div>
             </div>
 
@@ -109,8 +125,8 @@ export default function Signup() {
                     <input
                         type="checkbox"
                         id="terms-and-conditions"
-                        name="terms" 
-                        required/>I
+                        name="terms"
+                        required />I
                     agree to the terms and conditions
                 </label>
             </div>
