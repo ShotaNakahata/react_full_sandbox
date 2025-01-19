@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import logoImg from '../assets/logo.jpg';
 
 export default function Header() {
