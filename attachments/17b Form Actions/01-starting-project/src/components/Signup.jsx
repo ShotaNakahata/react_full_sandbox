@@ -1,37 +1,38 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { isEmail,isNotEmpty,hasMinLength, isEqualToOtherValue} from "../util/validation";
+import { isEmail, isNotEmpty, hasMinLength, isEqualToOtherValue } from "../util/validation";
 export default function Signup() {
   function singUpAction(formData) {
-    const email = formData.get("email")
-    const password = formData.get("password")
-    const confirmPassword = formData.get("confirm-password")
-    const firstName = formData.get("first-name")
-    const lastName = formData.get("last-name")
-    const role = formData.get("role")
-    const terms = formData.get("terms")
+    const data = Object.fromEntries(formData.entries());
+    const { email, password, "confirm-password": confirmPassword, "first-name": firstName, "last-name": lastName, role, terms } = data;
+    console.log(data)
+
     const acquisitionChannel = formData.getALL("acquisition")
-    let errors =[]
-    if(isEmail(email)){
+    let errors = []
+    if (isEmail(email)) {
       errors.push("Invalid email adress")
     }
-    if(!isNotEmpty(password)||hasMinLength(password,3)){
+    if (!isNotEmpty(password) || hasMinLength(password, 3)) {
       errors.push("You must provide passwort with at least 3 characters")
     }
-   if(isEqualToOtherValue(password,confirmPassword)) {
-    errors.push("Password do not match")
-   }
-   if(!isNotEmpty(firstName||!isNotEmpty(lastName))){
-    errors.push("You must provide Name")
-   }
-   if(isNotEmpty(role)){
-    errors.push("Please select roll")
-   }
-   if(!isNotEmpty(terms)){
-    errors.push("Please Agree terms")
-   }
-   if(acquisitionChannel.length===0){
-    errors.push("Please select at least one")
-   }
+    if (isEqualToOtherValue(password, confirmPassword)) {
+      errors.push("Password do not match")
+    }
+    if (!isNotEmpty(firstName || !isNotEmpty(lastName))) {
+      errors.push("You must provide Name")
+    }
+    if (isNotEmpty(role)) {
+      errors.push("Please select roll")
+    }
+    if (!isNotEmpty(terms)) {
+      errors.push("Please Agree terms")
+    }
+    if (acquisitionChannel.length === 0) {
+      errors.push("Please select at least one")
+    }
+    if (errors !== 0) {
+      return { errors }
+    }
+    return { errors: null }
   }
   return (
     <>
