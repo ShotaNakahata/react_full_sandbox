@@ -1,15 +1,25 @@
+import { useState } from "react";
 import { useRef } from "react";
 
 /* eslint-disable react/react-in-jsx-scope */
 export default function Login() {
+  const [emailIsInvalid,setEmailIsInvalid] = useState(false)
   const emailRef = useRef()
-  const inputRef = useRef()
+  const passwordRef = useRef()
   function handleSubmit(e) {
     e.preventDefault()
-    console.log(emailRef.current.value)
-    console.log(inputRef.current.value)
-    emailRef.current.value=""
-    inputRef.current.value=""
+    const enteredEmail = emailRef.current.value
+    const passwordRef = passwordRef.current.value
+    const emailIsValid = enteredEmail.includes("@");
+    if(!emailIsValid){
+      setEmailIsInvalid(true)
+      return;
+    }
+    setEmailIsInvalid(false)
+    console.log("sending HTTP request...")
+
+    // emailRef.current.value = ""
+    // passwordRef.current.value = ""
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -23,9 +33,10 @@ export default function Login() {
             type="email"
             name="email"
             ref={emailRef}
-            // onChange={(event)=>handleInputValue("enteredEmail",event)}
-            // value={enteredVal.enteredEmail}
+          // onChange={(event)=>handleInputValue("enteredEmail",event)}
+          // value={enteredVal.enteredEmail}
           />
+          <div className="control-error">{emailIsInvalid&&<p>Please input valid email adress</p>}</div>
         </div>
 
         <div className="control no-margin">
@@ -34,9 +45,9 @@ export default function Login() {
             id="password"
             type="password"
             name="password"
-            ref={inputRef}
-            // onChange={(event)=>handleInputValue("enteredPassword",event)}
-            // value={enteredVal.enteredPassword}
+            ref={passwordRef}
+          // onChange={(event)=>handleInputValue("enteredPassword",event)}
+          // value={enteredVal.enteredPassword}
           />
         </div>
       </div>
