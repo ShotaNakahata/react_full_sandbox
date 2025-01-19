@@ -1,20 +1,15 @@
-import { useState } from "react";
+import { useRef } from "react";
 
 /* eslint-disable react/react-in-jsx-scope */
 export default function Login() {
-  const [enteredVal, setEnteredVal] = useState({
-    enteredEmail: "",
-    enteredPassword: ""
-  })
-  function handleInputValue(identify,event) {
-    setEnteredVal(prev=>({
-      ...prev,
-      [identify]:event.target.value
-    }))
-  }
+  const emailRef = useRef()
+  const inputRef = useRef()
   function handleSubmit(e) {
     e.preventDefault()
-    console.log("enteredVal: ", enteredVal)
+    console.log(emailRef.current.value)
+    console.log(inputRef.current.value)
+    emailRef.current.value=""
+    inputRef.current.value=""
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -27,8 +22,9 @@ export default function Login() {
             id="email"
             type="email"
             name="email"
-            onChange={(event)=>handleInputValue("enteredEmail",event)}
-            value={enteredVal.enteredEmail}
+            ref={emailRef}
+            // onChange={(event)=>handleInputValue("enteredEmail",event)}
+            // value={enteredVal.enteredEmail}
           />
         </div>
 
@@ -38,8 +34,9 @@ export default function Login() {
             id="password"
             type="password"
             name="password"
-            onChange={(event)=>handleInputValue("enteredPassword",event)}
-            value={enteredVal.enteredPassword}
+            ref={inputRef}
+            // onChange={(event)=>handleInputValue("enteredPassword",event)}
+            // value={enteredVal.enteredPassword}
           />
         </div>
       </div>
