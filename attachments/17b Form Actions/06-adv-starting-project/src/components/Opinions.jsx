@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { use } from 'react';
 
 import { Opinion } from './Opinion';
