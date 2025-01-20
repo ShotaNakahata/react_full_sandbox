@@ -5,6 +5,8 @@ export default function Signup() {
   function singUpAction(prevFormState, formData) {
     const data = Object.fromEntries(formData.entries());
     const { email, password, "confirm-password": confirmPassword, "first-name": firstName, "last-name": lastName, role, terms } = data;
+    console.log("terms : ",terms)
+    console.log("role : ",role)
     const acquisitionChannel = formData.getAll("acquisition")
     let errors = []
     if (isEmail(email)) {
@@ -30,7 +32,11 @@ export default function Signup() {
     }
     if (errors !== 0) {
       console.log(errors)
-      return { errors }
+      return {
+        errors, enteredVal: {
+          email, password, confirmPassword, firstName, lastName, role, terms, acquisitionChannel
+        }
+      }
     }
     return { errors: null }
   }
@@ -43,13 +49,13 @@ export default function Signup() {
 
         <div className="control">
           <label htmlFor="email">Email</label>
-          <input id="email" type="email" name="email" />
+          <input id="email" type="email" name="email" defaultValue={formState.enteredVal?.email} />
         </div>
 
         <div className="control-row">
           <div className="control">
             <label htmlFor="password">Password</label>
-            <input id="password" type="password" name="password" />
+            <input id="password" type="password" name="password" defaultValue={formState.enteredVal?.password} />
           </div>
 
           <div className="control">
@@ -58,6 +64,7 @@ export default function Signup() {
               id="confirm-password"
               type="password"
               name="confirm-password"
+              defaultValue={formState.enteredVal?.confirmPassword}
             />
           </div>
         </div>
@@ -67,18 +74,18 @@ export default function Signup() {
         <div className="control-row">
           <div className="control">
             <label htmlFor="first-name">First Name</label>
-            <input type="text" id="first-name" name="first-name" />
+            <input type="text" id="first-name" name="first-name" defaultValue={formState.enteredVal?.firstName} />
           </div>
 
           <div className="control">
             <label htmlFor="last-name">Last Name</label>
-            <input type="text" id="last-name" name="last-name" />
+            <input type="text" id="last-name" name="last-name" defaultValue={formState.enteredVal?.lastName} />
           </div>
         </div>
 
         <div className="control">
           <label htmlFor="phone">What best describes your role?</label>
-          <select id="role" name="role">
+          <select id="role" name="role" defaultValue={formState.enteredVal?.role}>
             <option value="student">Student</option>
             <option value="teacher">Teacher</option>
             <option value="employee">Employee</option>
@@ -95,6 +102,7 @@ export default function Signup() {
               id="google"
               name="acquisition"
               value="google"
+              defaultChecked={formState.enteredVal?.acquisitionChannel.includes("google")}
             />
             <label htmlFor="google">Google</label>
           </div>
@@ -105,6 +113,7 @@ export default function Signup() {
               id="friend"
               name="acquisition"
               value="friend"
+              defaultChecked={formState.enteredVal?.acquisitionChannel.includes("friend")}
             />
             <label htmlFor="friend">Referred by friend</label>
           </div>
@@ -114,14 +123,16 @@ export default function Signup() {
               type="checkbox"
               id="other"
               name="acquisition"
-              value="other" />
+              value="other"
+              defaultChecked={formState.enteredVal?.acquisitionChannel.includes("other")}
+            />
             <label htmlFor="other">Other</label>
           </div>
         </fieldset>
 
         <div className="control">
           <label htmlFor="terms-and-conditions">
-            <input type="checkbox" id="terms-and-conditions" name="terms" />I
+            <input type="checkbox" id="terms-and-conditions" name="terms" defaultChecked={formState.enteredVal?.terms} />
             agree to the terms and conditions
           </label>
         </div>
