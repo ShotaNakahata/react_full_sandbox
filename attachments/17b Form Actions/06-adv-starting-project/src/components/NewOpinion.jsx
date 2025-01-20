@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { useActionState } from "react"
 import { OpinionsContext } from "../store/opinions-context"
+import Submit from "./Submit"
 
 /* eslint-disable react/react-in-jsx-scope */
 export function NewOpinion() {
@@ -60,9 +61,7 @@ export function NewOpinion() {
           </ul>
         )}
 
-        <p className="actions">
-          <button type="submit">Submit</button>
-        </p>
+        <Submit />
       </form>
     </div>
   );
