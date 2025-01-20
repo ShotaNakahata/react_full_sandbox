@@ -1,8 +1,11 @@
+import { useContext } from "react"
 import { useActionState } from "react"
+import { OpinionsContext } from "../store/opinions-context"
 
 /* eslint-disable react/react-in-jsx-scope */
 export function NewOpinion() {
-  function shareOpinionAction(prevState, formData) {
+  const { addOpinion } = useContext(OpinionsContext)
+  async function shareOpinionAction(prevState, formData) {
     const data = Object.fromEntries(formData.entries())
     const { userName, title, body } = data
     let error = []
@@ -25,6 +28,7 @@ export function NewOpinion() {
       }
     }
     //submit to backend
+    await addOpinion({ userName, title, body })
     return { error: null }
   }
   const [formState, formAction] = useActionState(shareOpinionAction, { error: null })
@@ -35,12 +39,12 @@ export function NewOpinion() {
         <div className="control-row">
           <p className="control">
             <label htmlFor="userName">Your Name</label>
-            <input type="text" id="userName" name="userName" defaultValue={formState.inputVal?.userName}/>
+            <input type="text" id="userName" name="userName" defaultValue={formState.inputVal?.userName} />
           </p>
 
           <p className="control">
             <label htmlFor="title">Title</label>
-            <input type="text" id="title" name="title" defaultValue={formState.inputVal?.title}/>
+            <input type="text" id="title" name="title" defaultValue={formState.inputVal?.title} />
           </p>
         </div>
         <p className="control">
