@@ -8,11 +8,7 @@ import { useOptimistic } from "react";
 /* eslint-disable react/react-in-jsx-scope */
 export function Opinion({ opinion: { id, title, body, userName, votes } }) {
   const { upvoteOpinion, downvoteOpinion } = useContext(OpinionsContext);
-  // const [optimisticVote, setVoteOptimisticaly] = useOptimistic(votes, (prev, mode) => (mode === "up" ? prev + 1 : prev - 1))
-  const [optimisticVote, setVoteOptimisticaly] = useOptimistic(votes, (prev, mode) => {
-    return mode === "up" ? prev + 1 : prev - 1
-  }
-)
+  const [optimisticVote, setVoteOptimisticaly] = useOptimistic(votes, (prev, mode) => (mode === "up" ? prev + 1 : prev - 1))
   async function upvoteAction() {
     setVoteOptimisticaly("up")
     await upvoteOpinion(id)
