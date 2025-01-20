@@ -1,11 +1,16 @@
 /* eslint-disable react/prop-types */
+
+import { useContext } from "react";
+import { OpinionsContext } from "../store/opinions-context";
+
 /* eslint-disable react/react-in-jsx-scope */
 export function Opinion({ opinion: { id, title, body, userName, votes } }) {
-  function upvoteAction() {
-    console.log("upvote")
+  const { upvoteOpinion, downvoteOpinion } = useContext(OpinionsContext);
+  async function upvoteAction() {
+    await upvoteOpinion(id)
   }
-  function downvoteAction() {
-    console.log("downvote")
+  async function downvoteAction() {
+    await downvoteOpinion(id)
   }
   return (
     <article>
