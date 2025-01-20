@@ -3,14 +3,22 @@
 import { useContext } from "react";
 import { OpinionsContext } from "../store/opinions-context";
 import { useActionState } from "react";
+import { useOptimistic } from "react";
 
 /* eslint-disable react/react-in-jsx-scope */
 export function Opinion({ opinion: { id, title, body, userName, votes } }) {
   const { upvoteOpinion, downvoteOpinion } = useContext(OpinionsContext);
+  // const [optimisticVote, setVoteOptimisticaly] = useOptimistic(votes, (prev, mode) => (mode === "up" ? prev + 1 : prev - 1))
+  const [optimisticVote, setVoteOptimisticaly] = useOptimistic(votes, (prev, mode) => {
+    return mode === "up" ? prev + 1 : prev - 1
+  }
+)
   async function upvoteAction() {
+    setVoteOptimisticaly("up")
     await upvoteOpinion(id)
   }
   async function downvoteAction() {
+    setVoteOptimisticaly("down")
     await downvoteOpinion(id)
   }
   // eslint-disable-next-line no-unused-vars
@@ -25,7 +33,7 @@ export function Opinion({ opinion: { id, title, body, userName, votes } }) {
       </header>
       <p>{body}</p>
       <form className="votes">
-        <button formAction={upvoteFormAction} disabled={upvotePending||downvotePending}>
+        <button formAction={upvoteFormAction} disabled={upvotePending || downvotePending}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -43,9 +51,9 @@ export function Opinion({ opinion: { id, title, body, userName, votes } }) {
           </svg>
         </button>
 
-        <span>{votes}</span>
+        <span>{optimisticVote}</span>
 
-        <button formAction={downvoteFormAction} disabled={upvotePending||downvotePending}>
+        <button formAction={downvoteFormAction} disabled={upvotePending || downvotePending}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
