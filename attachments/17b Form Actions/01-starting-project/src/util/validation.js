@@ -3,8 +3,9 @@ export function isEmail(value) {
 }
 
 export function isNotEmpty(value) {
-  return value.trim() !== '';
+  return typeof value === 'string' && value.trim() !== '';
 }
+
 
 export function hasMinLength(value, minLength) {
   return value.length >= minLength;

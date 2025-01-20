@@ -1,17 +1,16 @@
 /* eslint-disable react/react-in-jsx-scope */
+import { useActionState } from "react";
 import { isEmail, isNotEmpty, hasMinLength, isEqualToOtherValue } from "../util/validation";
 export default function Signup() {
-  function singUpAction(formData) {
+  function singUpAction(prevFormState, formData) {
     const data = Object.fromEntries(formData.entries());
     const { email, password, "confirm-password": confirmPassword, "first-name": firstName, "last-name": lastName, role, terms } = data;
-    console.log(data)
-
-    const acquisitionChannel = formData.getALL("acquisition")
+    const acquisitionChannel = formData.getAll("acquisition")
     let errors = []
     if (isEmail(email)) {
       errors.push("Invalid email adress")
     }
-    if (!isNotEmpty(password) || hasMinLength(password, 3)) {
+    if (!isNotEmpty(password) || !hasMinLength(password, 3)) {
       errors.push("You must provide passwort with at least 3 characters")
     }
     if (isEqualToOtherValue(password, confirmPassword)) {
@@ -20,23 +19,25 @@ export default function Signup() {
     if (!isNotEmpty(firstName || !isNotEmpty(lastName))) {
       errors.push("You must provide Name")
     }
-    if (isNotEmpty(role)) {
+    if (!isNotEmpty(role)) {
       errors.push("Please select roll")
     }
-    if (!isNotEmpty(terms)) {
+    if ((terms)) {
       errors.push("Please Agree terms")
     }
     if (acquisitionChannel.length === 0) {
       errors.push("Please select at least one")
     }
     if (errors !== 0) {
+      console.log(errors)
       return { errors }
     }
     return { errors: null }
   }
+  const [formState, formAction] = useActionState(singUpAction, { errors: null })
   return (
     <>
-      <form action={singUpAction}>
+      <form action={formAction}>
         <h2>Welcome on board!</h2>
         <p>We just need a little bit of data from you to get you started 🚀</p>
 
@@ -124,6 +125,14 @@ export default function Signup() {
             agree to the terms and conditions
           </label>
         </div>
+
+        {formState.errors &&
+          <ul className="error">
+            {formState.errors.map((error) => {
+              return <li key={error}>{error}</li>
+            })}
+          </ul>
+        }
 
         <p className="form-actions">
           <button type="reset" className="button button-flat">
