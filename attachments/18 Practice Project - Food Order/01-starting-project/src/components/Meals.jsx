@@ -16,9 +16,7 @@ function Meals() {
         <ul id='meals'>
             {meals.map((meal)=>{
                 return(
-                    <>
-                    <MealItems meal={meal}/>
-                    </>
+                    <MealItems meal={meal} key={meal.id}/>
                 )
             })}
         </ul>
