@@ -24,7 +24,7 @@ function Cart() {
         <Modal
             className='cart'
             open={userProgressCtx.process === "cart"}
-            onClose={userProgressCtx.process === "cart" && handleCloseCart}
+            onClose={userProgressCtx.process === "checkout" ? handleCloseCart : undefined}
             >
             <h2>Your Cart</h2>
             <ul>

@@ -15,9 +15,14 @@ function Checkout() {
     function handleCloseCheckout() {
         userProgressCtx.hideCheckout()
     }
+    function handleSubmit(e) {
+        e.preventDefault()
+        const fd = new FormData(e.target)
+        const customerData = Object.fromEntries(fd.entries())
+    }
     return (
         <Modal open={userProgressCtx.process==="checkout"} onClose={handleCloseCheckout}>
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 <h2>Checkout</h2>
                 <p>Total Amount: {cartTotal}</p>
                 <Input label="Full Name" type="text" id="full-name"></Input>
