@@ -13,19 +13,32 @@ function Checkout() {
         return acc += itemPrice
     }, 0)
     function handleCloseCheckout() {
-        userProgressCtx.hideCheckout()
+        userProgressCtx.hideCart(); // CartModal を閉じる
+        userProgressCtx.showCheckout();
     }
     function handleSubmit(e) {
         e.preventDefault()
         const fd = new FormData(e.target)
         const customerData = Object.fromEntries(fd.entries())
+        fetch("http://localhost:3000/orders", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                order: {
+                    items: cartCtx.items,
+                    customer: customerData
+                }
+            })
+        })
     }
     return (
-        <Modal open={userProgressCtx.process==="checkout"} onClose={handleCloseCheckout}>
+        <Modal open={userProgressCtx.process === "checkout"} onClose={handleCloseCheckout}>
             <form onSubmit={handleSubmit}>
                 <h2>Checkout</h2>
                 <p>Total Amount: {cartTotal}</p>
-                <Input label="Full Name" type="text" id="full-name"></Input>
+                <Input label="Full Name" type="text" id="name"></Input>
                 <Input label="E-mail" type="email" id="email"></Input>
                 <Input label="Street" type="text" id="street"></Input>
                 <div className='control-row'>

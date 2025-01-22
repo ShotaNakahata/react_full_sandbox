@@ -12,8 +12,8 @@ function App() {
         <CartContextProvider>
           <Header />
           <Meals />
-          <Cart/>
-          <Checkout/>
+          <Cart />
+          <Checkout />
         </CartContextProvider>
       </UserProgressProvider>
     </>
