@@ -14,8 +14,11 @@ function Cart() {
         return acc += itemPrice
     }, 0)
     function handleCloseCart() {
-        userProgressCtx.hideCart()
+        if (userProgressCtx.process === "cart") {
+            userProgressCtx.hideCart();
+        }
     }
+
     function handleOpenCheckout() {
         userProgressCtx.showCheckout()
     }
@@ -24,8 +27,8 @@ function Cart() {
         <Modal
             className='cart'
             open={userProgressCtx.process === "cart"}
-            onClose={userProgressCtx.process === "checkout" ? handleCloseCart : undefined}
-            >
+            onClose={handleCloseCart}
+        >
             <h2>Your Cart</h2>
             <ul>
                 {cartCtx.items.map((item) => {

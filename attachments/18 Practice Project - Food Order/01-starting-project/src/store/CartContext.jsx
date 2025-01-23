@@ -32,6 +32,9 @@ function cartReducer(state, action) {
             }
             return { ...state, items: updatedItems };
         }
+        case "CART-RESET": {
+            return { ...state, items: [] };
+        }
         default:
             return state;
     }
@@ -47,11 +50,15 @@ export function CartContextProvider({ children }) {
     function removeItem(id) {
         dispatchCartAction({ type: "REMOVE-ITEM", id });
     }
+    function clearCart() {
+        dispatchCartAction({ type: "CART-RESET"})
+    }
 
     const contextValue = {
         items: cart.items,
         addItem,
         removeItem,
+        clearCart
     };
     console.log("contextValue :", contextValue)
 

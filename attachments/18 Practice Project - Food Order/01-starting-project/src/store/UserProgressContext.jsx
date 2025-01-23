@@ -24,9 +24,15 @@ export function UserProgressProvider({ children }) {
     function hideCheckout() {
         setUserProgress("")
     }
+    function showFinish() {
+        setUserProgress("finish")
+    }
+    function hideFinish() {
+        setUserProgress("")
+    }
     const userProgressCtx = {
         process: userProgress,
-        showCart, hideCart, showCheckout, hideCheckout
+        showCart, hideCart, showCheckout, hideCheckout,showFinish,hideFinish
     }
     return <userProgressContext.Provider value={userProgressCtx}>{children}</userProgressContext.Provider>
 }
