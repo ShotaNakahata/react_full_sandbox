@@ -5,8 +5,8 @@ import { countActions } from "../store/index";
 
 const Counter = () => {
   const dispatch = useDispatch()
-  const counter = useSelector((state) => state.counter)
-  const toggleShow = useSelector((state) => state.showCounter)
+  const counter = useSelector((state) => state.counter.counter)
+  const toggleShow = useSelector((state) => state.counter.showCounter)
   const toggleCounterHandler = () => {
     dispatch(countActions.toggle())
   };

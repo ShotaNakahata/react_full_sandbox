@@ -1,10 +1,10 @@
-import { createSlice,configureStore } from "@reduxjs/toolkit";
+import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const initialState = { counter: 0, showCounter: true }
+const initialCounterState = { counter: 0, showCounter: true }
 
 const counterSlice = createSlice({
     name: "counter",
-    initialState: initialState,
+    initialState: initialCounterState,
     reducers: {
         increament(state) {
             state.counter++
@@ -50,10 +50,28 @@ const counterSlice = createSlice({
 //             return state
 //     }
 // }
-
+const initialAuthState = {
+    isAuthentication: false
+}
+const authSlice = createSlice({
+    name: "auth",
+    initialState: initialAuthState,
+    reducers: {
+        login(state) {
+            state.isAuthentication = true
+        },
+        logout(state) {
+            state.isAuthentication = false
+        }
+    }
+})
 const store = configureStore({
-    reducer:counterSlice.reducer
+    reducer: {
+        counter:counterSlice.reducer,
+        auth:authSlice.reducer
+    }
 })
 export const countActions = counterSlice.actions
+export const authActions = authSlice.actions
 export default store
 //reducerを登録したのはわかるのですがstoreはどこに行ったのの？どうやって参照するの？
