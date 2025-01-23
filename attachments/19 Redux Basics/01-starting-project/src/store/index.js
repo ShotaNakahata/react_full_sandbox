@@ -1,9 +1,9 @@
 import { createStore } from "redux";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,configureStore } from "@reduxjs/toolkit";
 
 const initialState = { counter: 0, showCounter: true }
 
-createSlice({
+const counterSlice = createSlice({
     name: "counter",
     initialState: initialState,
     reducers: {
@@ -21,38 +21,40 @@ createSlice({
         }
     }
 })
+// const counterReducer = (state = initialState, action) => {
+//     switch (action.type) {
+//         case "increament": {
+//             return {
+//                 counter: state.counter + 1,
+//                 showCounter: state.showCounter
+//             }
+//         }
+//         case "increase": {
+//             return {
+//                 counter: state.counter + action.amount,
+//                 showCounter: state.showCounter
+//             }
+//         }
+//         case "decreament": {
+//             return {
+//                 counter: state.counter - 1,
+//                 showCounter: state.showCounter
+//             }
+//         }
+//         case "toggle": {
+//             return {
+//                 showCounter: !state.showCounter,
+//                 counter: state.counter
+//             }
+//         }
+//         default:
+//             return state
+//     }
+// }
 
-const counterReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case "increament": {
-            return {
-                counter: state.counter + 1,
-                showCounter: state.showCounter
-            }
-        }
-        case "increase": {
-            return {
-                counter: state.counter + action.amount,
-                showCounter: state.showCounter
-            }
-        }
-        case "decreament": {
-            return {
-                counter: state.counter - 1,
-                showCounter: state.showCounter
-            }
-        }
-        case "toggle": {
-            return {
-                showCounter: !state.showCounter,
-                counter: state.counter
-            }
-        }
-        default:
-            return state
-    }
-}
-
-const store = createStore(counterReducer)
+const store = configureStore({
+    reducer:counterSlice.reducer
+})
 
 export default store
+//reducerを登録したのはわかるのですがstoreはどこに行ったのの？どうやって参照するの？
