@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useDispatch, useSelector } from 'react-redux';
 import classes from './Counter.module.css';
-import { countActions } from "../store/index";
+import { countActions } from "../store/counter-slice";
 
 const Counter = () => {
   const dispatch = useDispatch()
