@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/react-in-jsx-scope */
 import Card from '../UI/Card';
 import classes from './Cart.module.css';
 import CartItem from './CartItem';

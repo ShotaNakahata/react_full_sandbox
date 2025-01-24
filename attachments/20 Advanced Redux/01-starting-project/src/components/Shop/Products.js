@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/react-in-jsx-scope */
 import ProductItem from './ProductItem';
 import classes from './Products.module.css';
 
