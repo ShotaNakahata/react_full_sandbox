@@ -5,8 +5,8 @@ import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 import { } from "@reduxjs/toolkit";
 import { Fragment, useEffect } from 'react';
-import { uiActions } from './store/ui-slice';
 import Notification from './components/UI/Notification';
+import { sendCartData } from './store/cart-slice';
 
 let isInitial = true;
 
@@ -17,37 +17,11 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const sendCartData = async () => {
-      dispatch(uiActions.showNotification({
-        status: "pending",
-        title: "Senfing",
-        message: "Sending cart data!"
-      }))
-      const response = await fetch("https://reactfullsandbox-default-rtdb.firebaseio.com/cart.json", {
-        method: "PUT",
-        body: JSON.stringify(cart)
-      })
-      if (!response.ok) {
-        throw new Error("Sending cart data is faild")
-      }
-      dispatch(uiActions.showNotification({
-        status: "success",
-        title: "Succes!",
-        message: "Sent cart data succesflly!"
-      }))
-    }
-    if (isInitial) {
+    if(isInitial){
       isInitial = false
-      return
+      return 
     }
-    // eslint-disable-next-line no-unused-vars
-    sendCartData().catch((error) => {
-      dispatch(uiActions.showNotification({
-        status: "error",
-        title: "Error!",
-        message: "Sending cart data failed!"
-      }))
-    })
+    dispatch(sendCartData(cart))
   }, [cart, dispatch])
 
   return (
