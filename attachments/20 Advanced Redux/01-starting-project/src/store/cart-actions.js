@@ -15,7 +15,7 @@ export const fetchCartData = () => {
         try {
             const cartData = await fetchData()
             console.log("in fetchCartData try")
-            dispatch(cartActions.replaceCart(cartData)) //このreplaceが何をしているのか、なんで必要なのかが知りたい
+            dispatch(cartActions.replaceCart(cartData)) 
         } catch (error) {
             dispatch(uiActions.showNotification({
                 status: "error",
