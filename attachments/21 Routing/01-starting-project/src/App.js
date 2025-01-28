@@ -12,20 +12,19 @@ const router = createBrowserRouter([
     errorElement:<ErrorPage/>,
     children: [
       {
-        path: "/",
+        path: "",
         element: <HomePage />
       },
       {
-        path: "/products",
+        path: "products",
         element: <ProductsPage />
       },
       {
-        path:"/products/:productId",
+        path:"products/:productId",
         element:<ProductDetailPage/>
       }
     ]
   },
-
 ])
 
 function App() {
