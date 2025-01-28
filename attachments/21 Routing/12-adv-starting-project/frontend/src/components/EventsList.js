@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
 import classes from './EventsList.module.css';
 
 function EventsList({ events }) {
