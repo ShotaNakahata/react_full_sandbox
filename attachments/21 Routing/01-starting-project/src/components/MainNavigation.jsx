@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 
 function MainNavigation() {
@@ -12,7 +12,7 @@ function MainNavigation() {
                             to="/"
                             className={({ isActive }) => isActive ? classes.active : undefined}
                             end>
-                            Home!
+                            Home
                         </NavLink>
                     </li>
                     <li>
