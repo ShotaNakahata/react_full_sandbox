@@ -1,14 +1,30 @@
 import React from 'react'
-import { useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
+import EventItem from '../components/EventItem';
 
 function EventDetailPage() {
-    const param = useParams()
+    const data = useLoaderData()
+    console.log("from EventDetailPage (data): ", data)
     return (
-        <>
-            <h1>EventDetailPage</h1>
-            <p>Event ID : {param.eventId}</p>
-        </>
+        <EventItem event={data.event} />
     )
 }
 
 export default EventDetailPage
+
+
+export async function loader({  params }) {//ここの二つの引数はどうやって渡すのか、受け取るのか
+    const id = params.eventId
+    const response = await fetch("http://localhost:8080/events/" + id)
+    if (response.ok) {
+        const data = response.json()
+        return data
+    } else {
+        throw new Response(JSON.stringify({
+            message: "could not fetch event"
+        }, {
+            status: 500,
+            statusText: "Internal Server Error"
+        }))
+    }
+}
