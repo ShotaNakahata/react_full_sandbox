@@ -1,11 +1,1 @@
-{
-  "events": [
-    {
-      "id": "e1",
-      "title": "A dummy event",
-      "date": "2023-02-22",
-      "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
-      "description": "Join this amazing event and connect with fellow developers."
-    }
-  ]
-}
+{"events":[{"title":"New Ivent","image":"https://www.w3schools.com/html/img_girl.jpg","date":"2025-01-30","description":"New Ivent","id":"7fb71edf-13ee-4ac9-a037-2d7309a6099d"},{"title":"New Ivent","image":"https://www.w3schools.com/html/img_girl.jpg","date":"2025-01-30","description":"New Ivent","id":"15048885-66fe-4944-a580-82f8591d8a3d"},{"title":"New Ivent","image":"https://www.w3schools.com/html/img_girl.jpg","date":"2025-01-30","description":"New Ivent","id":"f88e2400-6a39-45b2-84f9-da94af0fece8"},{"title":"New Ivent","image":"https://www.w3schools.com/html/img_girl.jpg","date":"2025-01-30","description":"New Ivent","id":"a7d63e0f-8249-4c19-8abd-a1da4a112373"},{"title":"New Ivent","image":"https://www.w3schools.com/html/img_girl.jpg","date":"2025-01-30","description":"New Ivent","id":"5e90d1b8-b09a-4037-a398-105850fe6f4f"},{"title":"New Ivent","image":"https://www.w3schools.com/html/img_girl.jpg","date":"2025-01-30","description":"New Ivent","id":"01a60938-9cfe-4e0f-a97d-265031b09e6a"},{"id":"e1","title":"A dummy event","date":"2023-02-22","image":"https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg","description":"Join this amazing event and connect with fellow developers."}]}
