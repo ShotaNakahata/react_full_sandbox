@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
+
 import classes from './EventItem.module.css';
 import { Link, useSubmit } from "react-router-dom";
 function EventItem({ event }) {
