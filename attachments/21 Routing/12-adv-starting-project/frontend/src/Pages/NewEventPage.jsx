@@ -42,6 +42,13 @@ export async function action({ request }) {
       body: JSON.stringify(eventData),
     });
 
+    if(response.status===422){
+      if (response.status === 422) {
+        const errorData = await response.json(); // ❗ `response.json()` を取得
+        return errorData; // ✅ ここで JSON を返す！
+      }
+    }
+
   if (!response.ok) {
     throw new Response(JSON.stringify({ message: "could not fetch event" }), {
       status: 500,
