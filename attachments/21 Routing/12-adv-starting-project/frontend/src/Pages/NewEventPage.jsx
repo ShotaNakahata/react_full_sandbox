@@ -1,60 +1,44 @@
 import React from 'react'
 import EventForm from '../components/EventForm'
-import { redirect } from 'react-router-dom';
+// import { redirect } from 'react-router-dom';
 
 function NewEventPage() {
   console.log("Now Open NewEventPage")
   return (
-    <EventForm></EventForm>
+    <EventForm method="POST"></EventForm>
   )
 }
 
 export default NewEventPage
 
-export async function action({ request }) {
-  console.log("Ran NewEventPage Action");
-  console.log("from NewEventPage Action (request):", request);
+// export async function action({ request }) {
+//   console.log("Ran NewEventPage Action");
+//   console.log("from NewEventPage Action (request):", request);
 
-  // `request` を複製しておく
-  const requestClone = request.clone();
+//   const data = await request.formData();
 
-  // 1回目: 生データを確認（デバッグ用）
-  console.log("from NewEventPage Action (raw text body):", await requestClone.headers.get("Content-Type"));
-  
+//   const eventData = Object.fromEntries(data.entries());
+//   console.log("Final eventData:", eventData);
 
-  // 2回目: `FormData` を取得
-  const data = await request.formData();
-  console.log("from NewEventPage Action (data):", data);
+//   const response = await fetch("http://localhost:8080/events", {
+//       method: request.method,
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify(eventData),
+//     });
 
-  const eventData = Object.fromEntries(data.entries());
-  console.log("Final eventData:", eventData);
+//     if(response.status===422){
+//       if (response.status === 422) {
+//         const errorData = await response.json(); 
+//         return errorData; 
+//       }
+//     }
 
-  // const response = await fetch("http://localhost:8080/events", {
-  // // //さっきのdeleteのところ見て思ったけどForm自体にpostメソッドを追加したからmethodをハードコーディングせずにrequestから受け取れるんじゃね？
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify(eventData),
-  // });
-  const response = await fetch("http://localhost:8080/events", {
-    // //さっきのdeleteのところ見て思ったけどForm自体にpostメソッドを追加したからmethodをハードコーディングせずにrequestから受け取れるんじゃね？
-      method: request.method,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(eventData),
-    });
+//   if (!response.ok) {
+//     throw new Response(JSON.stringify({ message: "could not fetch event" }), {
+//       status: 500,
+//       statusText: "Internal Server Error",
+//     });
+//   }
 
-    if(response.status===422){
-      if (response.status === 422) {
-        const errorData = await response.json(); // ❗ `response.json()` を取得
-        return errorData; // ✅ ここで JSON を返す！
-      }
-    }
-
-  if (!response.ok) {
-    throw new Response(JSON.stringify({ message: "could not fetch event" }), {
-      status: 500,
-      statusText: "Internal Server Error",
-    });
-  }
-
-  return redirect("/events");
-}
+//   return redirect("/events");
+// }

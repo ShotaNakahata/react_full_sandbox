@@ -12,7 +12,7 @@ function EventDetailPage() {
 
 export default EventDetailPage
 
-
+//Event Detail GET 
 export async function loader({ params }) {
     const id = params.eventId
     const response = await fetch("http://localhost:8080/events/" + id)
@@ -28,6 +28,9 @@ export async function loader({ params }) {
         }))
     }
 }
+
+
+//delete Action
 export async function action({ request, params }) {
     const id = params.eventId
     const response = await fetch("http://localhost:8080/events/" + id, {

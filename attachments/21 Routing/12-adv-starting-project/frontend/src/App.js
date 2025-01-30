@@ -26,7 +26,8 @@ import HomePage from "./Pages/HomePage";
 import EventsPage, { loader as eventsLoader } from "./Pages/Events";
 import RootLayout from "./Pages/RootLayout";
 import EventDetailPage, { loader as eventDetailLoader, action as deleteEvent } from "./Pages/EventDetailPage";
-import NewEventPage, { action as newEventAction } from "./Pages/NewEventPage";
+import { action as mainplateEventAction } from "./components/EventForm";
+import NewEventPage from "./Pages/NewEventPage";
 import EditEventPage from "./Pages/EditEventPage";
 import EventsRoot from "./Pages/EventsRoot";
 import ErrorPage from "./Pages/Error";
@@ -52,7 +53,7 @@ const router = createBrowserRouter([{
         {
           path: "new",
           element: <NewEventPage />,
-          action: newEventAction
+          action: mainplateEventAction
         },
         {
           path: ":eventId",
@@ -65,7 +66,8 @@ const router = createBrowserRouter([{
               action: deleteEvent,
             }, {
               path: "edit",
-              element: <EditEventPage />
+              element: <EditEventPage />,
+              action: mainplateEventAction
             },
           ]
         },
@@ -79,3 +81,6 @@ function App() {
 }
 
 export default App;
+
+
+//method名って大文字じゃなくてもいいの？
