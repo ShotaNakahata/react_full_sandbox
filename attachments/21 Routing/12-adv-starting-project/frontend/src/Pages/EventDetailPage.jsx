@@ -1,5 +1,5 @@
 import React from 'react'
-import {  useRouteLoaderData } from "react-router-dom";
+import { redirect, useRouteLoaderData } from "react-router-dom";
 import EventItem from '../components/EventItem';
 
 function EventDetailPage() {
@@ -13,15 +13,31 @@ function EventDetailPage() {
 export default EventDetailPage
 
 
-export async function loader({  params }) {//ここの二つの引数はどうやって渡すのか、受け取るのか
+export async function loader({ params }) {
     const id = params.eventId
     const response = await fetch("http://localhost:8080/events/" + id)
     if (response.ok) {
-        const data =await  response.json()
+        const data = await response.json()
         return data
     } else {
         throw new Response(JSON.stringify({
             message: "could not fetch event"
+        }, {
+            status: 500,
+            statusText: "Internal Server Error"
+        }))
+    }
+}
+export async function action({ request, params }) {
+    const id = params.eventId
+    const response = await fetch("http://localhost:8080/events/" + id, {
+        method: request.method
+    })
+    if (response.ok) {
+        return redirect("/events")
+    } else {
+        throw new Response(JSON.stringify({
+            message: "could not delete event"
         }, {
             status: 500,
             statusText: "Internal Server Error"

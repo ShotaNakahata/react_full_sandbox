@@ -29,11 +29,18 @@ export async function action({ request }) {
   const eventData = Object.fromEntries(data.entries());
   console.log("Final eventData:", eventData);
 
+  // const response = await fetch("http://localhost:8080/events", {
+  // // //さっきのdeleteのところ見て思ったけどForm自体にpostメソッドを追加したからmethodをハードコーディングせずにrequestから受け取れるんじゃね？
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify(eventData),
+  // });
   const response = await fetch("http://localhost:8080/events", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(eventData),
-  });
+    // //さっきのdeleteのところ見て思ったけどForm自体にpostメソッドを追加したからmethodをハードコーディングせずにrequestから受け取れるんじゃね？
+      method: request.method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(eventData),
+    });
 
   if (!response.ok) {
     throw new Response(JSON.stringify({ message: "could not fetch event" }), {

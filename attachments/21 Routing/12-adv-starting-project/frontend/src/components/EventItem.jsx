@@ -1,10 +1,17 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
 import classes from './EventItem.module.css';
-import { Link } from "react-router-dom";
+import { Link, useSubmit } from "react-router-dom";
 function EventItem({ event }) {
+  const submit = useSubmit()
+
   function startDeleteHandler() {
-    // ...
+    const proceed = window.confirm("Are You Sure Delete it?")
+    if (proceed) {
+      submit(null, { 
+        method: "delete"
+      })
+    }
   }
 
   return (
