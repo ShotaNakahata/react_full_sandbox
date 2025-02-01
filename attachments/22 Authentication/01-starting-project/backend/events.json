@@ -1,12 +1,1 @@
-{
-  "events": [
-    {
-      "title": "A new event",
-      "image": "https://www.w3schools.com/html/img_girl.jpg",
-      "date": "2022-10-01",
-      "description": "Some awesome event!",
-      "id": "2a42fcc4-ea21-4bdd-abf6-c40006dc66a9"
-    }
-  ],
-  "users": []
-}
+{"events":[{"title":"A new event","image":"https://www.w3schools.com/html/img_girl.jpg","date":"2022-10-01","description":"Some awesome event!","id":"2a42fcc4-ea21-4bdd-abf6-c40006dc66a9"}],"users":[{"email":"pandora.osk@gmail.com","password":"$2a$12$AULG5kWApY4OkqCDSWzbku9A.1h/LzSWGQ0jBmgAz1qgzwWZnrNka","id":"e09d56c7-842a-4329-9972-6b15573b389a"}]}
