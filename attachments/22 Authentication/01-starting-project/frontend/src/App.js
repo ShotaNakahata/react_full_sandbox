@@ -14,6 +14,7 @@ import RootLayout from './pages/Root';
 import { action as manipulateEventAction } from './components/EventForm';
 import NewsletterPage, { action as newsletterAction } from './pages/Newsletter';
 import AuthenticationPage, { action as AuthAction } from './pages/Authentication';//add authAction
+import { action as logoutAction } from "./pages/Logout";
 
 
 const router = createBrowserRouter([
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
+      { path: "logout", action: logoutAction },
       { path: "auth", element: <AuthenticationPage />, action: AuthAction },//add authAction
       {
         path: 'events',
