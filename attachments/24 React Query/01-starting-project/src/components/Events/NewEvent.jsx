@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/react-in-jsx-scope */
 import { Link, useNavigate } from 'react-router-dom';
 
 import Modal from '../UI/Modal.jsx';
