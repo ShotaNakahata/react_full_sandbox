@@ -1,3 +1,4 @@
+import { redirect } from 'react-router-dom';
 import AuthForm from '../components/AuthForm';
 
 function AuthenticationPage() {
@@ -5,9 +6,17 @@ function AuthenticationPage() {
 }
 
 export default AuthenticationPage;
+
 export async function action({ request }) {
   const url = new URL(request.url);
   const mode = url.searchParams.get("mode");
+
+  if (mode !== "login" && mode !== "signup") {
+    throw new Object({ message: "Unsupported mode" }, {
+      status: 422,
+      statusText: "Unsupported mode"
+    })
+  }
 
   try {
     // フォームデータ取得
@@ -22,6 +31,10 @@ export async function action({ request }) {
       body: JSON.stringify(data),
     });
 
+    if (response.status === 422 || response.status === 411) {
+      return response
+    }
+
     // レスポンスの確認
     if (!response.ok) {
       const errorData = await response.json();
@@ -33,9 +46,12 @@ export async function action({ request }) {
 
     const responseData = await response.json();
     console.log("Response data:", responseData);
-    return responseData;
+    // return responseData;
+    return redirect("/")
   } catch (error) {
     console.error("Request failed:", error);
     return { message: "Request failed", error };
   }
+
+  
 }

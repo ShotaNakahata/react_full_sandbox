@@ -33,12 +33,12 @@ export default NewEventPage
 //       }
 //     }
 
-//   if (!response.ok) {
-//     throw new Response(JSON.stringify({ message: "could not fetch event" }), {
-//       status: 500,
-//       statusText: "Internal Server Error",
-//     });
-//   }
+  // if (!response.ok) {
+  //   throw new Response(JSON.stringify({ message: "could not fetch event" }),{
+  //     status: 500,
+  //     statusText: "Internal Server Error",
+  //   } );
+  // }
 
 //   return redirect("/events");
 // }
