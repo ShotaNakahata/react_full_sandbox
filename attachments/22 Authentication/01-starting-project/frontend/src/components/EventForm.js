@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
+import { getAuthToken } from '../util/Auth';
 
 function EventForm({ method, event }) {
   const data = useActionData();
@@ -36,7 +37,7 @@ function EventForm({ method, event }) {
           type="text"
           name="title"
           required
-          defaultValue={event ? event.title : ''}
+          defaultValue={event ? event.title : 'New Ivent'}
         />
       </p>
       <p>
@@ -46,7 +47,7 @@ function EventForm({ method, event }) {
           type="url"
           name="image"
           required
-          defaultValue={event ? event.image : ''}
+          defaultValue={event ? event.image : 'https://www.w3schools.com/html/img_girl.jpg'}
         />
       </p>
       <p>
@@ -56,7 +57,7 @@ function EventForm({ method, event }) {
           type="date"
           name="date"
           required
-          defaultValue={event ? event.date : ''}
+          defaultValue={event ? event.date : new Date().toISOString().split("T")[0]}
         />
       </p>
       <p>
@@ -66,7 +67,7 @@ function EventForm({ method, event }) {
           name="description"
           rows="5"
           required
-          defaultValue={event ? event.description : ''}
+          defaultValue={event ? event.description : 'New Ivent'}
         />
       </p>
       <div className={classes.actions}>
@@ -101,10 +102,13 @@ export async function action({ request, params }) {
     url = 'http://localhost:8080/events/' + eventId;
   }
 
+  const token = getAuthToken()
+
   const response = await fetch(url, {
     method: method,
     headers: {
       'Content-Type': 'application/json',
+      "Authorization": `Bearer ${token}`
     },
     body: JSON.stringify(eventData),
   });
@@ -119,4 +123,5 @@ export async function action({ request, params }) {
 
   return redirect('/events');
 }
+
 
