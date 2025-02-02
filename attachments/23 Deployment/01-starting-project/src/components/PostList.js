@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
 import { Link } from 'react-router-dom';
 
 import classes from './PostList.module.css';
