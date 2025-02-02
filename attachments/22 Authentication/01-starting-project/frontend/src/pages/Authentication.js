@@ -52,6 +52,4 @@ export async function action({ request }) {
     console.error("Request failed:", error);
     return { message: "Request failed", error };
   }
-
-  
 }
