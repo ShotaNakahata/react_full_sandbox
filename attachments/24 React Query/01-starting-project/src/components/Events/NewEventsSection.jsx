@@ -21,7 +21,6 @@ export default function NewEventsSection() {
   if (isError) {
     content = (
       <ErrorBlock title="An error occurred" message={error.info?.message || "Failed to fetch events"} />
-      //httpのエラーの際のresにmessageと記載されていないがなぜ存在することになっているの？
     );
   }
 
