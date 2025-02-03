@@ -8,11 +8,14 @@ import ErrorBlock from '../UI/ErrorBlock';
 import EventItem from './EventItem';
 
 export default function FindEventSection() {
-  const [serchterm, setSerchTerm] = useState();
+  const [serchTerm, setSerchTerm] = useState();
   const searchElement = useRef();
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ["events", { serch: serchterm }],
-    queryFn: () => fetchEvents(serchterm)
+    queryKey: ["events", { serch: serchTerm }],
+    queryFn: ({signal,queryKey}) => {
+      const [,params]= queryKey
+      return fetchEvents({signal,serchTerm:params.serch})
+    }
   })
 
   function handleSubmit(event) {
@@ -27,9 +30,9 @@ export default function FindEventSection() {
     content = <ErrorBlock title="An Error occurred" message={error.info?.message || "faild fech"} />
   }
   if (data) {
-    content = (<ui className="events-list">
+    content = (<ul className="events-list">
       {data.map((event) => <li key={event.id}><EventItem event={event} /></li>)}
-    </ui>)
+    </ul>)
   }
 
   return (
