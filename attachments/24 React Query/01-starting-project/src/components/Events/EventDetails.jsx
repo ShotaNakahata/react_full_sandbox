@@ -1,7 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 //[{"id":"e1","title":"Web Dev Networking Night!","description":"Meet, connect, and network with fellow budding web developers. Share your experiences and learn from others.","date":"2024-09-25","time":"18:00","location":"Innovation Lounge, New York, NY","image":"meeting-networking.jpg"}
 import { Link, Outlet, useParams, useNavigate } from 'react-router-dom';
-
 import Header from '../Header.jsx';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { deleteEvent, fetchEvent, queryClient } from '../../util/http.js';
@@ -14,14 +13,14 @@ export default function EventDetails() {
     queryFn: ({ signal }) => fetchEvent({ signal, id })
   });
   const { mutate } = useMutation({
-    mutationFn: () => deleteEvent({ id: id }),
+    mutationFn: deleteEvent,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["events"] })
       navigate("/events")
     }
   })
   function handleDelete() {
-    mutate()
+    mutate({id});
   }
   console.log(data)
   return (
