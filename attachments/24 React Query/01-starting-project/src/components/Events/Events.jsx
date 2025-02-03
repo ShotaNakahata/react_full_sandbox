@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { Link, Outlet } from 'react-router-dom';
 
 import Header from '../Header.jsx';

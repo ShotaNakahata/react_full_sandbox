@@ -1,6 +1,9 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
 import { useState } from 'react';
 
 import ImagePicker from '../ImagePicker.jsx';
+
 
 export default function EventForm({ inputData, onSubmit, children }) {
   const [selectedImage, setSelectedImage] = useState(inputData?.image);
@@ -11,11 +14,10 @@ export default function EventForm({ inputData, onSubmit, children }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-
     onSubmit({ ...data, image: selectedImage });
+    //なぜimgだけこのような指定方法なのか後で調べる
   }
 
   return (
