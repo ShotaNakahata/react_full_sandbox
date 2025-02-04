@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
 import MainHeader from '@/components/header/MainHeader';
 import './globals.css';
 import MainHeaderBackground from '@/components/header/MainHeaderBackground';
