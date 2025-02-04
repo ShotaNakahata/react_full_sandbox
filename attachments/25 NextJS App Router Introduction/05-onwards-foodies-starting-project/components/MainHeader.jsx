@@ -2,12 +2,13 @@ import React from 'react'
 import logoImg from "@/assets/logo.png";
 import Link from 'next/link';
 import classes from "./mainHeader.module.css";
+import Image from 'next/image';
 
 function MainHeader() {
   return (
     <header className={classes.header}>
       <Link href="/" className={classes.logo}>
-        <img src={logoImg.src} alt="food logo" />
+        <Image src={logoImg} alt="food logo" priority />
         Next Level Food
       </Link>
 
