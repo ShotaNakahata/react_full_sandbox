@@ -1,11 +1,13 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 
-function page({ params }) {
+function MealDetailPage({ params }) {
     return (
         <main>
-            <h1>{params.mealSlug}</h1>
+            <h1>Meal Detail</h1>
+            <h2>{params.mealSlug}</h2>
         </main>
     )
 }
 
-export default page
+export default MealDetailPage
