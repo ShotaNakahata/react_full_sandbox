@@ -3,10 +3,15 @@ import React from 'react'
 import classes from "./page.module.css";
 import Image from 'next/image';
 import { getMeal } from '@/lib/meals';
+import { notFound } from 'next/navigation';
 
 function MealDetailPage({params}) {
     const meal = getMeal(params.mealSlug)
-    meal.instructions = meal.instructions.replace(/\n/g,"<br/>")
+    if(!meal){
+        notFound()
+    }
+    meal.instructions = meal.instructions.replace(/\n/g,"<br/>");
+    
     console.log("meal",meal)
     return (
         <>
