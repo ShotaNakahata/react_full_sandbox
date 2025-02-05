@@ -37,6 +37,11 @@
     text-align: center;
     animation: loading 1.2s ease-in-out infinite;
   }
+  .loading {
+    text-align: center;
+    animation: loading 1.2s ease-in-out infinite;
+  }
+  
   
   @keyframes loading {
     0% {
