@@ -12,3 +12,8 @@ export async function getMeals() {
     // throw new Error("Loading meal erro")
     return db.prepare("SELECT * FROM meals").all();
 }
+
+export function getMeal(slug) {
+    console.log("in get meal")
+    return db.prepare("SELECT * FROM meals WHERE slug = ?").get(slug)
+}
