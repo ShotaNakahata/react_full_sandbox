@@ -12,7 +12,9 @@ function ImagePicker({ label, name }) {
     }
     function handleImageChange(e) {
         const file = e.target.files[0]
-        if (!file) return;
+        if (!file) {
+            setPickedImage(null)
+        }
         const fileReader = new FileReader()
         fileReader.onload = () => {
             setPickedImage(fileReader.result)
@@ -27,7 +29,7 @@ function ImagePicker({ label, name }) {
                 <div className={classes.preview}>
                     {!packedImage && <p>No image picked</p>}
                     {/* なぜここではpackedImage.srcではなくpackedImageだけでいいのか */}
-                    {packedImage && <Image src={packedImage} alt='user picked image' fill/>}
+                    {packedImage && <Image src={packedImage} alt='user picked image' fill />}
                 </div>
                 <input
                     className={classes.input}
@@ -37,6 +39,7 @@ function ImagePicker({ label, name }) {
                     id={name}
                     name={name}
                     accept='image/png, image/jpg'
+                    required
                 />
                 <button
                     className={classes.button}
