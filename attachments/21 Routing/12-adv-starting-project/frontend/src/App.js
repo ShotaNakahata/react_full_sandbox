@@ -1,6 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-
 import EditEventPage from './Pages/EditEventPage';
 import ErrorPage from './Pages/Error';
 import EventDetailPage, {
