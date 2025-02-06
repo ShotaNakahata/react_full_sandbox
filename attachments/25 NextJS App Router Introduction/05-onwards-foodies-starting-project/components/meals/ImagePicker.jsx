@@ -10,13 +10,14 @@ function ImagePicker({ label, name }) {
     function handleClick() {
         imageInputRef.current.click();
     }
-    function handleImageChange(e) {
+    function handleImageChange(e) { 
         const file = e.target.files[0]
         if (!file) {
             setPickedImage(null)
         }
         const fileReader = new FileReader()
         fileReader.onload = () => {
+            console.log("fileReader.result",fileReader.result)
             setPickedImage(fileReader.result)
         }
         fileReader.readAsDataURL(file);
