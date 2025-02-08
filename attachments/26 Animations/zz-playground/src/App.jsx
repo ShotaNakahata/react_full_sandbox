@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from "framer-motion";
 
 function App() {
   const [x, setX] = useState(0);
@@ -6,8 +7,8 @@ function App() {
   const [rotate, setRotate] = useState(0);
 
   return (
-    <div id="demo">
-      <div id="box" />
+    <div id="demo" >
+      <motion.div id="box" animate={{x:x,y:y,rotate:rotate}} transition={{duration:0.3}}/>
 
       <div id="inputs">
         <p>
