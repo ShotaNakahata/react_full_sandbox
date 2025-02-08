@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
 import { useContext } from 'react';
-
+import { motion } from "framer-motion";
 import { ChallengesContext } from '../store/challenges-context.jsx';
 
 export default function ChallengeItem({
@@ -44,11 +44,16 @@ export default function ChallengeItem({
             </p>
           </div>
         </header>
-        <div className={`challenge-item-details ${isExpanded ? "expanded" : ""}`}>
+        <div className={"challenge-item-details"}>
           <p>
             <button onClick={onViewDetails}>
               View Details{' '}
-              <span className="challenge-item-details-icon">&#9650;</span>
+              <motion.span
+                animate={{ rotate: isExpanded ? 180 : 0 }}
+                // transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="challenge-item-details-icon">
+                &#9650;
+              </motion.span>
             </button>
           </p>
 
