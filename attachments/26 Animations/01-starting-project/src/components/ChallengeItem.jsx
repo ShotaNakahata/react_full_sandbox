@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
 import { useContext } from 'react';
 
 import { ChallengesContext } from '../store/challenges-context.jsx';
@@ -42,7 +44,7 @@ export default function ChallengeItem({
             </p>
           </div>
         </header>
-        <div className="challenge-item-details">
+        <div className={`challenge-item-details ${isExpanded ? "expanded" : ""}`}>
           <p>
             <button onClick={onViewDetails}>
               View Details{' '}
