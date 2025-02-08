@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { createPortal } from 'react-dom';
 
 export default function Modal({ title, children, onClose }) {
