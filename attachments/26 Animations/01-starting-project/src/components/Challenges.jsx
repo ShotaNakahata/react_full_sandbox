@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { useContext, useState } from 'react';
 
 import { ChallengesContext } from '../store/challenges-context.jsx';
