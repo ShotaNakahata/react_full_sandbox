@@ -43,7 +43,13 @@ export default function Challenges() {
       >
         <AnimatePresence mode='wait'>
           {displayedChallenges.length > 0 && (
-            <motion.ol key="list" className="challenge-items" exit={{ y: -30, opacity: 0 }}>
+            <motion.ol
+              key="list"
+              className="challenge-items"
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ y: -30, opacity: 0 }}
+            >
               <AnimatePresence>
                 {displayedChallenges.map((challenge) => (
                   <ChallengeItem
@@ -56,7 +62,14 @@ export default function Challenges() {
               </AnimatePresence>
             </motion.ol>
           )}
-        {displayedChallenges.length === 0 && <motion.p initial={{y:-20,opacity:0}} animate={{opacity:1,y:0}} exit={{y:-20,opacity:0}} key="fallback">No challenges found.</motion.p>}
+          {displayedChallenges.length === 0 &&
+            <motion.p
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ y: -20, opacity: 0 }}
+              key="fallback">
+              No challenges found.
+            </motion.p>}
         </AnimatePresence>
       </ChallengeTabs>
     </div>
