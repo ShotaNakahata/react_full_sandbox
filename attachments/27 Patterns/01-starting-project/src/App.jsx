@@ -5,6 +5,7 @@ import caribbeanImg from './assets/caribbean-beach.jpg';
 import desertImg from './assets/desert-dunes.jpg';
 import forestImg from './assets/forest-waterfall.jpg';
 import SerchableList from "./components/SerchableList/SerchableList";
+import Place from "./Place";
 
 
 const PLACES = [
@@ -47,8 +48,8 @@ function App() {
         <h1>Why work with us</h1>
         <Accordion clasName="accordion">
           <Accordion.item id="experience" className="accordion-item">
-            <Accordion.title  className="accordion-item-title">20 years experience</Accordion.title>
-            <Accordion.content  lassName="accordion-item-content">
+            <Accordion.title className="accordion-item-title">20 years experience</Accordion.title>
+            <Accordion.content lassName="accordion-item-content">
               <article>
                 <p>you can't wrong us</p>
                 <p>i give you good experience</p>
@@ -57,7 +58,7 @@ function App() {
           </Accordion.item>
 
           <Accordion.item id="guides" className="accordion-item">
-            <Accordion.title  className="accordion-item-title">20 years experience</Accordion.title>
+            <Accordion.title className="accordion-item-title">20 years experience</Accordion.title>
             <Accordion.content lassName="accordion-item-content">
               <article>
                 <p>you can't wrong us</p>
@@ -69,8 +70,12 @@ function App() {
         </Accordion>
       </section>
       <section>
-        <SerchableList items={PLACES}/>
-        <SerchableList items={["item 1","item 2"]}/>
+        <SerchableList items={PLACES}>
+          {(item)=><Place item={item}/>}
+        </SerchableList>
+        <SerchableList items={["item 1", "item 2"]} >
+          {(item)=>item}
+        </SerchableList>
       </section>
     </main>
   )
