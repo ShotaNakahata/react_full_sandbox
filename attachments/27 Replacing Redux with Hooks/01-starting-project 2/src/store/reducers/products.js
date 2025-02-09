@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { TOGGLE_FAV } from '../actions/products';
 
 const initialState = {
