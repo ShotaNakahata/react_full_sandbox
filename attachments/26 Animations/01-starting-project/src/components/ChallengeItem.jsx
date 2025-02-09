@@ -58,11 +58,14 @@ export default function ChallengeItem({
           </p>
 
           {isExpanded && (
-            <div>
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }} >
               <p className="challenge-item-description">
                 {challenge.description}
               </p>
-            </div>
+            </motion.div>
           )}
         </div>
       </article>
