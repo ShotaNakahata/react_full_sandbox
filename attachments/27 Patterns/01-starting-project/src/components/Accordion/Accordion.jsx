@@ -8,7 +8,7 @@ const AccordionContext = createContext()
 
 export function useAccordionContext() {
     const ctx = useContext(AccordionContext)
-    if(!ctx){
+    if (!ctx) {
         throw new Error("must use in <Accordion>")
     }
     return ctx
@@ -18,14 +18,11 @@ function Accordion({ children, className }) {
     const [openItemId, setOpenItemId] = useState(null)
     const contextVal = {
         openItemId,
-        openItem,
-        closeItem
+        toggleItem
     }
-    function openItem(id) {
-        setOpenItemId(id)
-    }
-    function closeItem() {
-        setOpenItemId(null)
+    function toggleItem(id) {
+        setOpenItemId((prev) => prev === id ? null : id)
+
     }
     return (
         <AccordionContext.Provider value={contextVal}>
