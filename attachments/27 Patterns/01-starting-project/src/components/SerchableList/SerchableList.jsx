@@ -2,7 +2,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-function SerchableList({ items, children }) {
+function SerchableList({ items, children, itemKeyFn }) {
   const [searchTerm, setSearchTerm] = useState("")
   const searchResult = items.filter((item) =>
     JSON.stringify(item).toLowerCase().includes(searchTerm.toLowerCase())
@@ -14,9 +14,9 @@ function SerchableList({ items, children }) {
     <div className='searchable-list'>
       <input type="serch" placeholder='serch' onChange={handleChange} />
       <ul>
-        {searchResult.map((item, index) => {
+        {searchResult.map((item) => {
           // return (<li key={index}>{item.toString()}</li>)
-          return (<li key={index}>
+          return (<li key={itemKeyFn(item)}>
             {children(item)}
           </li>)
           // return (<li key={index}>{JSON.stringify(item)}</li>)
